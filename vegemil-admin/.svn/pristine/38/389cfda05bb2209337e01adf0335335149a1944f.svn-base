@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.FaqMapper">
+
+	<sql id="faqColumns">
+		  f_idx
+		, f_cate
+		, f_question
+		, f_answer
+		, f_view
+		, f_hit
+		, f_editdate
+		, f_gory
+		, f_img
+	</sql>
+
+	<insert id="insertFaq" parameterType="com.vegemil.domain.FaqDTO">
+		INSERT INTO M_Faq (
+			<include refid="faqColumns" />
+		) VALUES (
+			  #{fIdx}
+			, #{fCate}
+			, #{fQuestion}
+			, #{fAnswer}
+			, #{fView}
+			, 0
+			, IFNULL(#{fEditdate}, now())
+			, #{fGory}
+			, #{fImg}
+		)
+	</insert>
+
+	<select id="selectFaqDetail" parameterType="long" resultType="com.vegemil.domain.FaqDTO">
+		SELECT
+			<include refid="faqColumns" />
+		FROM
+			M_Faq
+		WHERE
+			f_idx = #{fIdx}
+	</select>
+
+	<update id="updateFaq" parameterType="com.vegemil.domain.FaqDTO">
+		UPDATE M_Faq
+		SET
+			  f_editdate = NOW()
+			, f_question = IFNULL(#{fQuestion}, 'N')
+			, f_answer = IFNULL(#{fAnswer}, 'N')
+		WHERE
+			f_idx = #{fIdx}
+	</update>
+
+	<update id="deleteFaq" parameterType="long">
+		UPDATE M_Faq
+		SET
+			  f_editdate = NOW()
+		WHERE
+			f_idx = #{fIdx}
+	</update>
+
+	<select id="selectFaqList" parameterType="com.vegemil.domain.FaqDTO" resultType="com.vegemil.domain.FaqDTO">
+		SELECT
+			<include refid="faqColumns" />
+		FROM
+			M_Faq
+		WHERE
+			f_view = '1'
+			<include refid="CommonMapper.search" />
+		ORDER BY
+			f_idx DESC
+			<include refid="CommonMapper.paging" />
+	</select>
+
+	<select id="selectFaqTotalCount" parameterType="com.vegemil.domain.FaqDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_Faq
+		WHERE
+			f_view = '1'
+			<include refid="CommonMapper.search" />
+	</select>
+
+</mapper>

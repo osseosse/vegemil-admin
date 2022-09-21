@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.BabyEventMapper">
+
+	<!-- 베스트후기선정 -->
+	<sql id="babyEventColumns">
+		e_idx,
+		e_subject,
+		e_content,
+		e_img,
+		e_start,
+		e_end,
+		e_uri,
+		e_active,
+		e_img2,
+		e_uri2,
+		mbs_check,
+		e_cate,
+		e_bvactive
+	</sql>
+
+	<insert id="insertBabyEvent" parameterType="com.vegemil.domain.BabyEventDTO">
+		INSERT INTO M_EventList (
+			<include refid="babyEventColumns" />
+		) VALUES (
+			#{eIdx},
+			#{eSubject},
+			#{eContent},
+			#{eImg},
+			#{eStart},
+			#{eEnd},
+			#{eUri},
+			#{eActive},
+			#{eImg2},
+			#{eUri2},
+			#{mbsCheck},
+			#{eCate},
+			#{eBvactive}
+			)
+	</insert>
+
+	<select id="selectBabyEventDetail" parameterType="long" resultType="com.vegemil.domain.BabyEventDTO">
+		SELECT
+			<include refid="babyEventColumns" />
+		FROM
+			M_EventList
+		WHERE
+			e_idx = #{eIdx}
+	</select>
+
+	<update id="updateBabyEvent" parameterType="com.vegemil.domain.BabyEventDTO">
+		UPDATE M_EventList
+		SET
+			e_subject = #{eSubject},
+			e_content = #{eContent},
+			e_img 	  = #{eImg},
+			e_start	  = #{eStart},
+			e_end	  = #{eEnd},
+			e_uri	  = #{eUri},
+			e_active  = #{eActive},
+			e_img2	  = #{eImg2},
+			e_uri2	  = #{eUri2},
+			mbs_check = #{mbsCheck},
+			e_cate	  = #{eCate},
+			e_bvactive=#{eBvactive}
+		WHERE
+			e_idx = #{eIdx}
+	</update>
+
+	<delete id="deleteBabyEvent" parameterType="long">
+		DELETE 
+		FROM   M_EventList
+		WHERE
+			   e_idx = #{eIdx}
+	</delete>
+
+	<select id="selectBabyEventList" parameterType="com.vegemil.domain.BabyEventDTO" resultType="com.vegemil.domain.BabyEventDTO">
+		SELECT
+			<include refid="babyEventColumns" />
+		FROM
+			M_EventList
+		<!-- WHERE
+			( c_writeDate > LAST_DAY(NOW() - interval 1 month) AND c_writeDate <= LAST_DAY(NOW()) )
+		<include refid="CommonMapper.search" /> -->
+		ORDER BY
+			e_idx DESC
+			
+		<!-- <include refid="CommonMapper.paging" />  -->
+	</select>
+
+	<select id="selectBabyEventTotalCount" parameterType="com.vegemil.domain.BabyEventDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_EventList
+		<!-- WHERE
+		<include refid="CommonMapper.search" /> -->
+	</select>
+	<!-- 베스트후기선정 -->
+</mapper>

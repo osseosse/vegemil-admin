@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="board/fragments/header :: main-head"> </head>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
+	<meta name="description" content="혜춘장학회는 정식품 창업주이신 故정재원명예회장이 우수한 인재가 면학에 전념할 수 있도록 설립 "/>
+	<meta property="og:title" content="혜춘장학회, 정재원명예회장, 정재원, 장학재단, 정식품, 두유, 베지밀, 유당불내증, 두유개발, 1984년설립,  사회적책임, 의학박사">
+	<meta property="og:url" content="https://www.hcsf.co.kr/">
+	<meta property="og:image" content="https://www.hcsf.co.kr/img/info03.jpg">
+	<title>혜춘장학회</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/owl.carousel.min.css" rel="stylesheet">
+	<link href="css/owl.theme.default.min.css" rel="stylesheet">
+	<link href="css/animate.min.css" rel="stylesheet">
+	<link href="css/jquery.pagepiling.css" rel="stylesheet">
+	<link href="css/jquery.fancybox.min.css" rel="stylesheet">
+	<link href="css/LineIcons.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css'>
+	<link rel="stylesheet" href="css/style1.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="img/favicons/hyechun_favicon_ios.png">
+	<link rel="shortcut icon" href="img/favicons/favicon_hc.ico">
+</head>
+<body class="body-copyright-light">
+<div class="preloader">
+	<div class="three-bounce">
+		<div class="one">
+		</div>
+		<div class="two">
+		</div>
+		<div class="three">
+		</div>
+	</div>
+</div>
+<div class="wrapper">
+	<header id="header" class="header header-fixed">
+	<a href="https://hcsf.co.kr"><div class="logo"></div></a>
+	<div class="container-fluid clearfix">
+		<button class="nav-toggle-btn a-nav-toggle">
+		<span class="nav-toggle">
+			<span class="stick stick-1"></span>
+			<span class="stick stick-2"></span>
+		</span>
+		</button>
+	</div>
+	<div class="hide-menu a-nav-toggle"></div>
+	<div class="menu">
+		<nav class="menu-main" id="accordion">
+			<p>MENU</p>
+			<ul id="menuMain">
+				<li class="active"><a href="./" >장학회 소개</a></li>
+				<li><a href="./history.do">재단연혁</a></li>
+				<li><a href="./board.do">재단소식</a></li>
+				<li><a href="./financial.do">결산공고</a></li>
+			</ul>
+		</nav>
+		<div class="menu-footer">
+			<ul class="mf_type mNone">
+				<li><p>소재지<br><span>서울특별시 중구 퇴계로 6길 3-30</span></p></li>
+				<li><p>전화번호 &middot; 팩스<br><span>02-6273-1313 &middot; 02-553-0839</span></p></li>
+			</ul>
+			<ul class="mf_type2">
+				<li><p>FAMILY SITE</p></li><br>
+				<li><a href="https://www.vegemil.co.kr/Main/" target="_blank"><img src="./img/ci_dcf.gif" onmouseover="javascript:this.src='./img/ci_dcf_on.gif'" onmouseout="javascript:this.src='./img/ci_dcf.gif'" alt="정식품" ></a></li>
+				
+				<li><a href="https://www.innp.co.kr/kr/Default.aspx" target="_blank"><img src="./img/ci_nnp.gif" onmouseover="javascript:this.src='./img/ci_nnp_on.gif'" onmouseout="javascript:this.src='./img/ci_nnp.gif'" alt="자연과사람들" ></a></li>
+
+				<li><a href="https://www.osse.co.kr/main/kr/default.aspx" target="_blank"><img src="./img/ci_osse.gif" onmouseover="javascript:this.src='./img/ci_osse_on.gif'" onmouseout="javascript:this.src='./img/ci_osse.gif'" alt="오쎄" ></a></li>
+			</ul>
+		</div>
+	</div>
+	</header>
+	<div id="content" class="content">
+		<div class="homepage-personal a-pagepiling">
+			<!-- 01 인트로 -->
+			<div class="section pp-scrollable slide-dark slide-dark-footer slide-personal-intro bg01">
+				<div class="slide-container2">
+					<div class="slide-bg">
+						<div class="slide-photo slide-intro-circle1 transformLeft">
+						</div>
+						<!-- circle-golden -->
+						<div class="slide-photo slide-intro-circle2 transformRight">
+						</div>
+						<!-- circle-brown -->
+						<div class="slide-photo slide-intro-man">
+						</div>
+					</div>
+					<div class="container">
+						<div class="row mainTitle">
+							<div class="col-sm-12 col-12">
+								<h1 class="slide-title animate-element delay5 fadeInDown mNone">혜춘장학회</h1>
+								<!--
+								<h1 class="slide-title animate-element delay5 fadeInDown">HYECHUN <br>
+								 SCHOLARSHIP FOUNDATION</h1>
+								 -->
+							</div>
+							<div class="col-sm-4 col-4">
+								<h4 class="type01 animate-element delay5 fadeInDown">
+								<p class="info_title">
+									 법인재단 설립년차
+								</p>
+								<p>
+									<span class="counter">36</span>
+									<span class="c_type">년</span>
+								</p>
+								</h4>
+							</div>
+							<div class="col-sm-4 col-4 mt20m">
+								<h4 class="type01 animate-element delay5 fadeInDown">
+								<p class="info_title">
+									 장학금 지급 누적현황
+								</p>
+								<p>
+									<span class="counter">245,000</span>
+									<span class="c_type">만원</span>
+								</p>
+								</h4>
+							</div>
+							<div class="col-sm-4 col-4 mt20m">
+								<h4 class="type01 animate-element delay5 fadeInDown">
+								<p class="info_title">
+									 장학생 누적현황
+								</p>
+								<p>
+									<span class="counter">2,500</span>
+									<span class="c_type">명</span>
+								</p>
+								</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="down">
+					<a href="#Info"><span><img src="./img/btn_scroll.png" alt="scroll"/></span></a>
+					<p>SCROLL</p>
+				</div>
+			</div>
+			<!-- //01 인트로 -->
+			<!-- 02 재단소개 -->
+			<div class="section pp-scrollable slide-dark slide-dark text-white slide-personal-projects" style="overflow:hidden">
+				<!-- 슬라이드추가 -->
+				<div class="text-slider-wrapper">
+					<div class="container-1" >
+						<div class="row">
+							<div class="col-sm-12 col-12 ">
+								<p class="slide-title3 animate-element delay5 fadeInDown">Incorporated Foundation Story</p>
+								<h1 class="slide-title2 animate-element delay5 fadeInDown">재단소개</h1>
+							</div>
+
+							<div class="col-sm-12 col-12">
+								<div class="slider-control ">
+									<div class="slide-btn-1 mNone">
+										<a href="/history.do" class="btn_mj_y">READ MORE &nbsp;<i class="lni lni-arrow-right mr-3"></i></a>
+									</div>
+									<div class="prev mHide">
+										<button class="b0" type="button"><i class="lni lni-chevron-left"></i></button>
+									</div>
+									<div class="next mHide">
+										<button class="b0" type="button"><i class="lni lni-chevron-right"></i></button>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<div class="text-slider">
+						<div class="text-slide">
+							<h1>정식품의 창업주이신<br>
+							 의학박사 故정재원 명예회장</h1>
+						</div>
+						<div class="text-slide">
+							<h1>소아불치병 <br>
+								해답을 찾기위해 유학
+							</h1>
+						</div>
+						<div class="text-slide">
+							<h1>유당불내증 발견, <br>
+								귀국후 베지밀 개발
+							</h1>
+						</div>
+						<div class="text-slide">
+							<h1>정식품 창업후, 우수한 인재가<br>
+							 공부에 대한 가슴앓이 않도록</h1>
+						</div>
+						
+						<div class="text-slide">
+							<h1>학비를 지원해 줌으로서 <br>
+							 면학에만 전념할 수 있게</h1>
+						</div>
+						
+						
+						<div class="text-slide">
+							<h1>사회적책임을 다하기 위해<br>
+							1984년 ‘혜춘장학회’를 설립</h1>
+						</div>
+					</div>
+				</div>
+				
+				<div class="blocks">
+					<div class="block-1">
+					</div>
+					<div class="block-2">
+					</div>
+					<div class="block-3">
+					</div>
+				</div>
+				<div class="overlay">
+				</div>
+				<div class="image-slider">
+					<div class="image-slide" id="one" style="background: url(./img/info02.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="two" style="background: url(./img/info03.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="three" style="background: url(./img/info04.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="four" style="background: url(./img/info01.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="five" style="background: url(./img/info05.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="six" style="background: url(./img/info06.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<!--
+					<div class="image-slide" id="one" style="background: url(./img/info01.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="two" style="background: url(./img/info05.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="three" style="background: url(./img/info06.jpg) no-repeat 50% 50%; background-size: cover;">
+					</div>
+					<div class="image-slide" id="four" style="background: url(./img/info02.jpg) no-repeat 50% 50%; background-size: cover;">1
+					</div>
+					<div class="image-slide" id="five" style="background: url(./img/info03.jpg) no-repeat 50% 50%; background-size: cover;">2
+					</div>
+					<div class="image-slide" id="six" style="background: url(./img/info04.jpg) no-repeat 50% 50%; background-size: cover;">3
+					</div>
+					-->
+				</div>
+				<!--
+				<div class="slide-btn-11 wNone">
+					<a href="sub_history.html" class="btn_mj_w ">READ MORE &nbsp;<i class="lni lni-arrow-right mr-3"></i></a>
+				</div>
+				-->
+				<div class="down">
+					<a href="#Member"><span><img src="./img/btn_scroll.png" alt="scroll"/></span></a>
+					<p>SCROLL</p>
+				</div>
+				<!-- //슬라이드추가 -->
+			</div>
+			<!-- //02 재단소개 -->
+			<!-- 03 임원소개 -->
+			<div class="section pp-scrollable slide-personal-services bg03">
+				<div class="slide-container">
+					<!--
+					<div class="slide-bg">
+						<div class="slide-photo circle-light slide-services-circle2 transformLeft">
+						</div>
+						<div class="slide-photo circle-brown slide-services-circle1 transformRight">
+						</div>
+					</div>
+					-->
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 col-12">
+								<p class="slide-title3 animate-element delay5 fadeInDown">
+									Organization introduction
+								</p>
+								<h1 class="slide-title2 animate-element delay5 fadeInDown">임원소개</h1>
+							</div>
+							<div class="col-md-4 oiBox">
+								<div class="animate-element delay5 fadeInDown">
+									<dl class="oi">
+										<dt>이사장</dt>
+										<dd>
+										<ul>
+											<li>정성수
+											<p>
+												(주)정식품 회장
+											</p>
+											</li>
+										</ul>
+										</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="col-md-4 oiBox">
+								<div class="animate-element delay5 fadeInDown">
+									<dl class="oi">
+										<dt>이사</dt>
+										<dd>
+										<ul class="oi_harf">
+											<li>김성수
+											<p>
+												前)정식품 대표이사
+											</p>
+											</li>
+											<li>정연호
+											<p>
+												(주)자연과사람들,<br>
+												(주)오쎄 대표이사
+											</p>
+											</li>
+										</ul>
+										<ul class="oi_harf">
+											<li>박황현
+											<p>
+												양재최의원 원장
+											</p>
+											</li>
+											<li>윤석구
+											<p>
+												前)자연과사람들 <br>
+												대표이사
+											</p>
+											</li>
+										</ul>
+										<ul class="oi_harf">
+											<li>정지택
+											<p>
+												前)두산중공업<br>
+												부회장
+											</p>
+											</li>
+											<li>임경희
+											<p>
+												중앙대학교 공과대학<br>
+												명예교수
+											</p>
+											</li>
+										</ul>
+										<ul class="oi_harf">
+											<li>박성주
+											<p>
+												한국과학기술원<br>
+												명예교수
+											</p>
+											</li>
+											<li>조대연
+											<p>
+												김&장법률사무소<br>
+												변호사
+											</p>
+											</li>
+										</ul>
+										<ul class="oi_harf">
+											<li>조일환
+											<p>
+												前)주프랑스대사
+											</p>
+											</li>
+											<li>&nbsp;</li>
+										</ul>
+										</dd>
+									</dl>
+								</div>
+							</div>
+							<div class="col-md-4 oiBox">
+								<div class="animate-element delay5 fadeInDown">
+									<dl class="oi">
+										<dt>감사</dt>
+										<dd>
+										<ul>
+											<li>남상욱
+											<p>
+												제원회계법인<br>
+												회계사
+											</p>
+											</li>
+										</ul>
+										<ul>
+											<li>김무영
+											<p>
+												前)정식품 대표이사
+											</p>
+											</li>
+										</ul>
+										</dd>
+									</dl>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			
+
+				<div class="down3"><!-- down3 PC absolute; M relative -->
+					<a href="#NewsRoom"><span><img src="./img/btn_scroll.png" alt="scroll"/></span></a>
+					<p>SCROLL</p>
+				</div>
+
+
+
+			</div>
+			<!-- //03 임원소개 -->
+			<!-- 04 활동소식 -->
+			<div class="section pp-scrollable slide-dark slide-dark-bg  slide-personal-projects">
+				<div class="slide-container">
+					<div class="slide-bg ">
+						<div class="slide-photo circle-sh01 slide-services-circle1 transformRight "></div>
+						<div class="slide-photo circle-sh02 slide-services-circle2 transformLeft mNone"></div>
+						<div class="slide-photo circle-sh03 slide-services-circle3 transformLeft "></div>
+						<div class="slide-photo circle-sh04 slide-services-circle4 transformLeft mNone"></div>
+					</div>
+					
+					<div class="container" >
+						<div class="col-sm-12 col-12 wNone">
+							<p class="slide-title3  mCenter animate-element delay5 fadeInDown">NEWS ROOM</p>
+							<h1 class="slide-title4 mCenter animate-element delay5 fadeInDown">활동소식</h1>
+							<p class="txt-title5 mNone">(재)혜춘장학회의 최근 소식을<br>만나보세요.</p>
+						</div>
+
+						<div class="row align-items-center mb-4 animate-element delay5 fadeInDown">
+							<div class="col-md-4 mNone">
+								<p class="slide-title3 animate-element delay5 fadeInDown mCenter">NEWS ROOM</p>
+								<h2 class="slide-title4 mCenter">활동소식</h2>
+								<p class="txt-title5">(재)혜춘장학회의 최근 소식을<br>만나보세요.</p>
+								<div class="a-carousel-nav carousel-nav mHide"></div>
+								<div class="slide-btn mCenter btnStyle">
+									<a href="/board.do" class="btn_mj_b">READ MORE &nbsp;<i class="lni lni-arrow-right mr-3"></i></a>
+								</div>
+							</div>
+							<div class="col-md-8 col-sm-12 text-right md-8-center">
+								<div class="animate-element delay5 fadeInUp">
+									<div class="carousel-experience a-carousel-experience owl-carousel owl-theme">
+										<!-- 20년 -->
+										<div class="experience-list">
+											<div class="experience-item">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="pt_text_box">
+															<img src="./img/photo2020.jpg" alt="장학회사진 "/>
+															<p class="pt_info">
+																혜춘장학회, 장학금 1억600만원 전달
+															</p>
+															<p class="pt_day">
+																2020-05-29
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- 19년 -->
+										<div class="experience-list">
+											<div class="experience-item">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="pt_text_box">
+															<img src="./img/photo2019.jpg" alt="장학회사진 "/>
+															<p class="pt_info">
+																정식품 '혜춘장학회' 장학금 9900만원 전달
+															</p>
+															<p class="pt_day">
+																2019-05-31
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- 18년 -->
+										<div class="experience-list">
+											<div class="experience-item">
+												<div class="row">
+													<div class="col-md-12">
+														<div class="pt_text_box">
+															<img src="./img/photo2018.jpg" alt="장학회사진 "/>
+															<p class="pt_info">
+																정식품 ‘혜춘장학회 장학금 수여식’, 8100만원 전달
+															</p>
+															<p class="pt_day">
+																2018-05-31
+															</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<!-- //18년 -->
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+				
+				<div class="slide-btn-44 wNone">
+					<a href="/board.do" class="btn_mj_b">READ MORE &nbsp;<i class="lni lni-arrow-right mr-3"></i></a>
+				</div>
+			
+
+				<div class="down3"><!-- down3 PC absolute; M relative -->
+					<a href="#Financial"><span><img src="./img/btn_scroll_2.png" alt="scroll"/></span></a>
+					<p class="black">SCROLL</p>
+				</div>
+
+
+			</div>
+			<!-- //04 활동소식 -->
+			<!-- 05 결산공고 -->
+			<div class="section pp-scrollable slide-personal-services bg02">
+				<div class="slide-container">
+					<div class="container">
+						<div class="row">
+							<div class="col-sm-12 col-12">
+								<p class="slide-title3 animate-element delay5 fadeInDown">
+									Statement of Financial Position
+								</p>
+								<h1 class="slide-title2 animate-element delay5 fadeInDown">결산공고</h1>
+							</div>
+							<div class="col-md-12">
+								<div class="animate-element delay5 fadeInDown">
+									<table class="closing" cellspacing="0" border="0" summary="결산공고 다운로드">
+										<caption>결산공고</caption>
+										<colgroup>
+											<col width="70%">
+											<col width="30%">
+										</colgroup>
+										<tr>
+											<th><a href="./down/hc_2020.pdf" target="_blank"><span>(재)혜춘장학회 2020년 37기 결산공고</span> <img src="./img/down.png" alt="다운로드" /></a></th>
+											<td><p class="closing_day">2021-04-15</p></td>
+										</tr>
+										<tr>
+											<th><a href="./down/hc_2019.pdf" target="_blank"><span>(재)혜춘장학회 2019년 36기 결산공고</span> <img src="./img/down.png" alt="다운로드" /></a></th>
+											<td><p class="closing_day">2020-05-12</p></td>
+										</tr>
+										<tr>
+											<th><a href="./down/hc_2018.pdf" target="_blank"><span>(재)혜춘장학회 2018년 35기 결산공고</span> <img src="./img/down.png" alt="다운로드" /></a></th>
+											<td><p class="closing_day">2019-05-12</p></td>
+										</tr>
+										<tr>
+											<th><a href="./down/hc_2017.pdf" target="_blank"><span>(재)혜춘장학회 2017년 34기 결산공고</span> <img src="./img/down.png" alt="다운로드" /></a></th>
+											<td><p class="closing_day">2018-05-12</p></td>
+										</tr>
+										<tr>
+											<th><a href="./down/hc_2016.pdf" target="_blank"><span>(재)혜춘장학회 2016년 33기 결산공고</span> <img src="./img/down.png" alt="다운로드" /></a></th>
+											<td><p class="closing_day">2017-05-12</p></td>
+										</tr>
+									</table>
+									<div style="height:150px" class="mNone"></div>
+								</div>
+							</div><!-- col-md-12 -->
+						</div>
+					</div>
+				</div>
+
+				<div class="slide-btn-33">
+					<a href="/financial.do" class="btn_mj_y ">READ MORE &nbsp;<i class="lni lni-arrow-right mr-3"></i></a>
+				</div>
+
+				<div class="down3">
+					<a href="#Map"><span><img src="./img/btn_scroll.png" alt="scroll"/></span></a>
+					<p>SCROLL</p>
+				</div>
+			</div>
+			<!-- //05 결산공고 -->
+
+			<!-- 06 재단정보 -->
+			<div class="section pp-scrollable slide-dark slide-dark-bg ">
+				<div class="slide-container">
+					<div class="slide-bg">
+						<div class="slide-photo circle-sh06 slide-services-circle6 transformRight"></div>
+						<div class="slide-photo circle-sh04 slide-services-circle5 transformLeft"></div>
+					</div>
+					<div class="container">
+						<div class="row infoRow" >
+							<div class="col-sm-12 col-12 mb50m">
+								<p class="slide-title3 animate-element delay5 fadeInDown center">INFORMATION</p>
+								<h1 class="slide-title5 animate-element delay5 fadeInDown center">재단정보</h1>
+							</div>
+							<div class="col-md-6 animate-element fadeInDown">
+								<iframe class="google_map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d664.9066612659857!2d126.97859285818734!3d37.55867000853482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc574a36ef82d7174!2zKOyjvCnsoJXsi53tkog!5e0!3m2!1sko!2skr!4v1597796249125!5m2!1sko!2skr" width="100%"  frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+							</div>
+							<div class="col-md-6 ">
+								<div class="infoT_box animate-element fadeInDown">
+									<table cellspacing="0" border="0" class="infoT" >
+										<colgroup>
+											<col width="40%">
+											<col width="60%">
+										</colgroup>
+										<tr>
+											<th>공익법인명</th>
+											<td>(재)혜춘장학회</td>
+										</tr>
+										<tr>
+											<th>이사장</th>
+											<td>정성수</td>
+										</tr>
+										<tr>
+											<th>소재지</th>
+											<td>서울특별시 중구 퇴계로 6길 3-30</td>
+										</tr>
+										<tr>
+											<th>공익사업유형</th>
+											<td>학술, 장학</td>
+										</tr>
+										<tr>
+											<th>주무관청</th>
+											<td>서울특별시 교육청</td>
+										</tr>
+										<!--
+										<tr>
+											<th>설립주체</th>
+											<td>개인</td>
+										</tr>
+										<tr>
+											<th>사업연도</th>
+											<td>2019-01-01 ~ 2019-12-31</td>
+										</tr>
+										-->
+										<tr>
+											<th>설립년월일</th>
+											<td>1984-12-04</td>
+										</tr>
+										<tr>
+											<th>전자우편주소</th>
+											<td>system34248@vegemil.co.kr</td>
+										</tr>
+										<tr>
+											<th>설립근거법</th>
+											<td>공익법인의 설립, 운영에 관한 법률</td>
+										</tr>
+										<tr>
+											<th>기부금(단체)유형</th>
+											<td>지정기부금단체</td>
+										</tr>
+										<tr>
+											<th>단체유형</th>
+											<td>재단법인</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</div><!-- // row -->
+					</div>
+				</div>
+			</div>
+			<!-- //06 재단정보 -->
+		</div>
+	</div>
+	<input type="hidden" id="slidesToShow" value="1" />
+	<!-- 2020-10-05 -->
+	<footer id="footer" class="footer">
+	<div class="copyright copyright-fixed d-none d-md-block">
+		 &copy; Hyechun Scholarship Foundation<br/> All Rights Reserved
+		 <div class="foot_link"><a href="https://www.sen.go.kr/main/services/index/index.action" target="_blank"><span>서울시교육청</span></a>&nbsp;ㅣ&nbsp;<a href="https://www.hometax.go.kr/" target="_blank"><span>국세청</span></a></div>
+	</div>
+	</footer>
+	<!-- //2020-10-05 -->
+</div>
+<script>
+/*<![CDATA[*/
+	if (document.location.protocol == 'http:') {
+		if(document.location.host != 'localhost:8080') {
+	    	document.location.href = document.location.href.replace('http:', 'https:');
+		}
+
+	}
+/*]]>*/
+</script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')</script>
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/jquery.pagepiling.min.js"></script>
+<script src="js/jquery.fancybox.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/script.js"></script>
+<!-- 코드팬슬라이드 -->
+<script src='js/slick.min.js'></script>
+<script src='https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js'></script>
+<!-- 스크롤다운 -->
+<script src="js/script1.js"></script>
+<!-- 카운트 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script src="js/jquery.countup.js"></script>
+<script>
+		$(function() {
+			$('.counter').countUp();
+			$(document).on('mousewheel keydown',function(e){
+				var wheel = e.originalEvent.wheelDelta;
+				if(wheel>0){
+				//스크롤 올릴때
+				$('.counter').countUp();
+				} else if(wheel < 0) {
+				//스크롤 내릴때
+				$('.counter').countUp();
+				}
+				if(e.keyCode =='37' || e.keyCode =='38') {
+					$('.counter').countUp();
+				}
+			});
+			
+			$(document).ready( function() {
+				var uAgent = navigator.userAgent.toLowerCase();
+				var mobilePhones = new Array('iphone','ipod','ipad','android','blackberry','windows ce',
+											'nokia','webos','opera mini','sonyericsson','opera mobi','iemobile');
+											
+				for(var i=0;i<mobilePhones.length;i++) {
+					if(uAgent.indexOf(mobilePhones[i]) != -1) {
+					    console.log('mobile');
+						document.getElementById("slidesToShow").value = 1;
+						break;
+					}else{
+						document.getElementById("slidesToShow").value = 2;
+					}
+				}
+				console.log(document.getElementById("slidesToShow").value);
+			});
+			
+		});
+	</script>
+	<script type="text/x-javascript">
+		(function(w, d, a){
+		    w.__beusablerumclient__ = {
+		        load : function(src){
+		            var b = d.createElement("script");
+		            b.src = src; b.async=true; b.type = "text/x-javascript";
+		            d.getElementsByTagName("head")[0].appendChild(b);
+		        }
+		    };w.__beusablerumclient__.load(a);
+		})(window, document, "//rum.beusable.net/script/b161207e112311u833/8b5ccd7c0a");
+	</script>
+</body>
+</html>

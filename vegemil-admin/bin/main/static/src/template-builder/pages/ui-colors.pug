@@ -1,0 +1,26 @@
+//- =========================================================================
+  File Name: ui-colors.pug
+  Description: Bootstrap 4 Primary Color Palette
+  --------------------------------------------------------------------------
+  Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+  Author: PIXINVENT
+  Author URL: http://www.themeforest.net/user/pixinvent
+  ==========================================================================
+
+extends template
+
+block pageVars
+  - var pageTitle   = "Colors"
+  - var pageSubTitle = "Color Options"
+  - var description  = "Color can be a wonderful tool for making your dashboard less stressful and more calming."
+  - var activeMenu  = "ui-colors"
+
+block breadcrumbs
+  +breadcrumbs([{url:"index.html",name:"Home"},{url:"#",name:"UI"}, {name:"Colors"}])
+
+//- Include page content in page block
+append content
+  include ../contents/ui-colors.html
+
+append pagecss
+  link(rel='stylesheet', type='text/css', href=app_assets_path + '/css'+rtl+'/pages/ui-colors.css')

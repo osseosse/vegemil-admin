@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="context-path" th:content="@{/}"/>
+    <title>관리자</title>
+    <!--  Common header -->
+    <th:block th:include="admin/common/include-head"></th:block>
+</head>
+<body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click" data-menu="vertical-menu-modern" data-col="">
+ 	
+ 	<header th:replace="admin/common/common-header"></header>
+ 	
+    <!-- Side Bar -->
+    <nav th:replace="admin/common/common-sidebar"></nav>
+        
+    <!-- Main Content -->
+    <div th:replace="${template}"></div>
+    
+    <!-- Footer -->
+    <footer th:replace="admin/common/common-footer"></footer>
+    
+    <!-- Common script -->
+    <th:block th:include="admin/common/include-script"></th:block>
+    
+</body>
+</html>

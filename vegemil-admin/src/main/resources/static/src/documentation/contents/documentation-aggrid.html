@@ -1,0 +1,79 @@
+<!-- AgGrid -->
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Basic Initialization</h4>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      ag-Grid is a fully-featured and highly customizable JavaScript data grid. It delivers outstanding performance, has
+      no 3rd party dependencies and integrates smoothly.
+    </p>
+    <h6>1. Initialize the plugin by referencing the necessary files:</h6>
+    <pre class="language-markup">
+  <code class="language-markup"> &lt;!-- Vendor files --&gt;
+  &lt;script src="ag-grid/ag-grid-community.min.noStyle.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" type="text/css" href="ag-grid/ag-grid.css"&gt;
+  &lt;link rel="stylesheet" type="text/css" href="ag-grid/ag-theme-material.css"&gt;
+
+  &lt;!-- Template files --&gt;
+  &lt;script src="app-assets/js/scripts/tables/table-ag-grid.js"&gt;&lt;/script&gt;
+  &lt;link rel="stylesheet" type="text/css" href="app-assets/css/plugins/tables/table-ag-grid.css"&gt;
+              </code>
+          </pre>
+    <div class="alert alert-primary mt-1" role="alert">
+      <div class="alert-body"><strong>Note!</strong> Add Ag Grid themes css files as per requirements.</div>
+    </div>
+
+    <h6>2. Call the AgGrid-function after the page has loaded</h6>
+    <pre class="language-javascript">
+<code class="language-javascript"> // GRID OPTIONS
+var gridOptions = {
+  columnDefs: columnDefs,
+  rowSelection: 'multiple',
+  floatingFilter: true,
+  filter: true,
+  pagination: true,
+  paginationPageSize: 20,
+  pivotPanelShow: 'always',
+  colResizeDefault: 'shift',
+  animateRows: true,
+  resizable: true
+};
+
+// DEFINED TABLE VARIABLE
+var gridTable = document.getElementById('myGrid');
+// INIT TABLE
+new agGrid.Grid(gridTable, gridOptions); </code>
+</pre>
+    <p class="mt-2">
+      <strong>Refer following links for detailed documentation, configuration options, methods and examples:</strong>
+    </p>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Plugin Link</strong></td>
+            <td><a href="https://www.ag-grid.com/" target="_blank">https://www.ag-grid.com/</a></td>
+          </tr>
+          <tr>
+            <td><strong>Template Page</strong></td>
+            <td>
+              <a
+                href="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/html/ltr/vertical-menu-template/table-ag-grid.html"
+                target="_blank"
+                >https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/html/ltr/vertical-menu-template/table-ag-grid.html</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<!--/ AgGrid -->

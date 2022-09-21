@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.BestReviewMapper">
+
+	<!-- 베스트후기선정 -->
+	<sql id="bestReviewColumns">
+		 s_idx
+		,s_url
+		,s_writedate
+		,s_writetime
+		,s_uid
+		,s_title
+		,s_edayId
+		,s_sns
+		,s_image
+		,s_rank
+	</sql>
+
+	<insert id="insertBestReview" parameterType="com.vegemil.domain.BestReviewDTO">
+		INSERT INTO M_SNSRegistURL (
+			<include refid="bestReviewColumns" />
+		) VALUES (
+		 	  #{sIdx}
+			, #{sUrl}
+			, DATE_FORMAT(now(), '%Y-%m-%d')
+			, DATE_FORMAT(now(), '%H:%i:%s')
+			, #{sUid}
+			, #{sTitle}
+			, #{sEdayId}
+			, #{sSns}
+			, #{sImage}
+			, #{sRank}
+		)
+	</insert>
+
+	<select id="selectBestReviewDetail" parameterType="long" resultType="com.vegemil.domain.BestReviewDTO">
+		SELECT
+			<include refid="bestReviewColumns" />
+		FROM
+			M_SNSRegistURL
+		WHERE
+			s_idx = #{sIdx}
+	</select>
+
+	<update id="updateBestReview" parameterType="com.vegemil.domain.BestReviewDTO">
+		UPDATE M_SNSRegistURL
+		SET
+			  s_desctime = NOW()
+			, s_rank = #{sRank}
+		WHERE
+			s_idx = #{sIdx}
+	</update>
+
+	<update id="deleteBestReview" parameterType="long">
+		UPDATE M_SNSRegistURL
+		SET
+			  delete_yn = 'Y'
+			, delete_time = NOW()
+		WHERE
+			s_idx = #{sIdx}
+	</update>
+
+	<select id="selectBestReviewList" parameterType="com.vegemil.domain.BestReviewDTO" resultType="com.vegemil.domain.BestReviewDTO">
+		SELECT
+			<include refid="bestReviewColumns" />
+		FROM
+			M_SNSRegistURL
+		<!-- WHERE
+			( c_writeDate > LAST_DAY(NOW() - interval 1 month) AND c_writeDate <= LAST_DAY(NOW()) )
+		<include refid="CommonMapper.search" /> -->
+		ORDER BY
+			s_idx DESC
+			
+		<!-- <include refid="CommonMapper.paging" />  -->
+	</select>
+
+	<select id="selectBestReviewTotalCount" parameterType="com.vegemil.domain.BestReviewDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_SNSRegistURL
+		<!-- WHERE
+		<include refid="CommonMapper.search" /> -->
+	</select>
+	<!-- 베스트후기선정 -->
+</mapper>

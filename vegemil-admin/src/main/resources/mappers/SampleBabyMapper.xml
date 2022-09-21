@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.SampleBabyMapper">
+
+	<!-- 베스트후기선정 -->
+	<sql id="sampleBabyColumns">
+		 s_idx
+		,s_id
+		,s_mname
+		,s_year
+		,s_hp
+		,s_tel
+		,s_zipcode
+		,s_addr1
+		,s_addr2
+		,s_email
+		,s_writedate
+		,s_name
+		,s_sex
+		,s_materdate
+		,s_foodplan
+		,s_sabo
+		,s_before
+		,s_deliver
+		,s_deliverdate
+		,s_item
+		,s_feedmethod
+		,s_babycnt
+		,s_materdate2
+		,s_name2
+		,s_sex2
+		,s_feedmethod2
+		,s_materdate3
+		,s_name3
+		,s_sex3
+		,s_feedmethod3
+	</sql>
+
+	<insert id="insertSampleBaby" parameterType="com.vegemil.domain.SampleBabyDTO">
+		INSERT INTO M_SampleBaby (
+			<include refid="sampleBabyColumns" />
+		) VALUES (
+			  #{sIdx}
+			, #{sId}
+			, #{sMname}
+			, #{sYear}
+			, #{sHp}
+			, #{sTel}
+			, #{sZipcode}
+			, #{sAddr1}
+			, #{sAddr2}
+			, #{sEmail}
+			, DATE_FORMAT(now(), '%Y-%m-%d')
+			, #{sName}
+			, #{sSex}
+			, #{sMaterdate}
+			, #{sFoodplan}
+			, #{sSabo}
+			, #{sBefore}
+			, #{sDeliver}
+			, #{sDeliverdate}
+			, #{sItem}
+			, #{sFeedmethod}
+			, #{sBabycnt}
+			, #{sMaterdate2}
+			, #{sName2}
+			, #{sSex2}
+			, #{sFeedmethod2}
+			, #{sMaterdate3}
+			, #{sName3}
+			, #{sSex3}
+			, #{sFeedmethod3}
+		)
+	</insert>
+
+	<select id="selectSampleBabyDetail" parameterType="long" resultType="com.vegemil.domain.SampleBabyDTO">
+		SELECT
+			<include refid="sampleBabyColumns" />
+		FROM
+			M_SampleBaby
+		WHERE
+			s_idx = #{sIdx}
+	</select>
+
+	<update id="updateSampleBaby" parameterType="com.vegemil.domain.SampleBabyDTO">
+		UPDATE M_SampleBaby
+		SET
+			  s_deliverdate = DATE_FORMAT(now(), '%Y-%m-%d')
+			, s_deliver = #{sDeliver}
+		WHERE
+			s_idx = #{sIdx}
+	</update>
+
+	<update id="deleteSampleBaby" parameterType="long">
+		UPDATE M_SampleBaby
+		SET
+			  delete_yn = 'Y'
+			, delete_time = NOW()
+		WHERE
+			s_idx = #{sIdx}
+	</update>
+
+	<select id="selectSampleBabyList" parameterType="com.vegemil.domain.SampleBabyDTO" resultType="com.vegemil.domain.SampleBabyDTO">
+		SELECT
+			<include refid="sampleBabyColumns" />
+		FROM
+			M_SampleBaby
+		<!-- WHERE
+			( c_writeDate > LAST_DAY(NOW() - interval 1 month) AND c_writeDate <= LAST_DAY(NOW()) )
+		<include refid="CommonMapper.search" /> -->
+		ORDER BY
+			s_idx DESC
+			
+		<!-- <include refid="CommonMapper.paging" />  -->
+	</select>
+
+	<select id="selectSampleBabyTotalCount" parameterType="com.vegemil.domain.SampleBabyDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_SampleBaby
+		<!-- WHERE
+		<include refid="CommonMapper.search" /> -->
+	</select>
+	<!-- 베스트후기선정 -->
+</mapper>

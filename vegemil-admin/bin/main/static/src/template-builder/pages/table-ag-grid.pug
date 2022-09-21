@@ -1,0 +1,41 @@
+//- =========================================================================================
+    File Name: table-ag-grid.pug
+    Description: Ag-Grid Table
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+    ==========================================================================================-//
+
+extends template
+
+block pageVars
+    - var pageTitle    = "agGrid Table"
+    - var pageSubTitle = "ag-grid table Component with advance option for table"
+    - var description  = "ag-grid table Component with advance option for table"
+    - var activeMenu   = "table-ag-grid"
+
+block breadcrumbs
+    +breadcrumbs([{url:"index.html",name:"Home"},{name:"agGrid Table"}])
+append content
+    include ../contents/table-ag-grid.html
+
+//- Vendor CSS
+//------------------------------
+//- Add vendor specific CSS
+append vendorcss
+    link(rel='stylesheet', type='text/css', href=app_assets_path+'/vendors/css/tables/ag-grid/ag-grid.css')
+    link(rel='stylesheet', type='text/css', href=app_assets_path+'/vendors/css/tables/ag-grid/ag-theme-material.css')
+//- Vendor JS
+//------------------------------
+//- Add vendor specific JS
+append vendorjs
+    script(src=app_assets_path+'/vendors/js/tables/ag-grid/ag-grid-community.min.noStyle.js')
+
+append pagecss
+  link(rel='stylesheet', type='text/css', href=app_assets_path+'/css'+rtl+'/plugins/tables/table-ag-grid.css')
+//- Page JS
+//------------------------------
+//- Add custom page specific JS
+append pagejs
+    script(src=app_assets_path+'/js/scripts/tables/table-ag-grid.js')

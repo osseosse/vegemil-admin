@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>육아 상담 관리</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/extensions/ext-component-toastr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-quill-editor.css}">
+		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/katex.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/monokai-sublime.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/quill.snow.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/quill.bubble.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/extensions/toastr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.twbsPagination.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/katex.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/highlight.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/quill.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/forms/form-select2.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/components/components-dropdowns.js}"></script>
+	    
+	    <script th:src="@{/js/admin/baby/components-pagination.js}"></script>
+	    <script th:src="@{/js/admin/baby/babyInfoList.js}"></script>
+	    <script>
+		    $('.firstLast1-links').twbsPagination({
+		        totalPages: [[ ${params.PaginationInfo.totalPageCount} ]],
+		        visiblePages: 5,
+		        prev: 'Prev',
+		        first: 'First',
+		        last: 'Last',
+		        startPage: [[ ${params.currentPageNo} ]],
+		        initiateStartPageClick: false,
+		        onPageClick: function (event, page) {
+		        	$('.pagination').find('li').addClass('page-item');
+		        	$('.pagination').find('a').addClass('page-link');
+	
+		          	window.location.href = '[[ ${#request.requestURI} ]]?currentPageNo=' + page;
+		        }
+		     });
+		    
+			
+				
+			var Font = Quill.import('formats/font');
+			  Font.whitelist = ['sofia', 'slabo', 'roboto', 'inconsolata', 'ubuntu'];
+			  Quill.register(Font, true);
+			  
+		    var fullEditor = new Quill('#full-container .editor', {
+		        bounds: '#full-container .editor',
+		        modules: {
+		          formula: true,
+		          syntax: true,
+		          toolbar: [
+		            [
+		              {
+		                font: []
+		              },
+		              {
+		                size: []
+		              }
+		            ],
+		            ['bold', 'italic', 'underline', 'strike'],
+		            [
+		              {
+		                color: []
+		              },
+		              {
+		                background: []
+		              }
+		            ],
+		            [
+		              {
+		                script: 'super'
+		              },
+		              {
+		                script: 'sub'
+		              }
+		            ],
+		            [
+		              {
+		                header: '1'
+		              },
+		              {
+		                header: '2'
+		              },
+		              'blockquote',
+		              'code-block'
+		            ],
+		            [
+		              {
+		                list: 'ordered'
+		              },
+		              {
+		                list: 'bullet'
+		              },
+		              {
+		                indent: '-1'
+		              },
+		              {
+		                indent: '+1'
+		              }
+		            ],
+		            [
+		              'direction',
+		              {
+		                align: []
+		              }
+		            ],
+		            ['link', 'image', 'video', 'formula'],
+		            ['clean']
+		          ]
+		        },
+		        theme: 'snow'
+			});
+		    
+		    $("input[name=fileName]").off().on("change", function(){
+		    	if (this.files && this.files[0]) {
+		    		var maxSize = 5 * 1024 * 1024;
+		    		var fileSize = this.files[0].size;
+
+		    		if(fileSize > maxSize){
+		    			alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다.");
+		    			$(this).val('');
+		    			return false;
+		    		}
+		    	}
+		    });
+
+			function registerBabyQna(){
+				$('#mbsContent').attr("value",fullEditor.root.innerHTML);
+		    }
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ecommerce-application">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+        	<div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">육아 상담 관리</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                    <div class="mb-1 breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+            	<div class="bs-stepper checkout-tab-steps">
+	            	<!-- Wizard starts -->
+	                <div class="bs-stepper-header">
+	                    <div class="step" data-target="#step-cart" role="tab" id="step-cart-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="list" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">육아 상담 리스트</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                    <div class="line">
+	                        
+	                    </div>
+	                    <div class="step" data-target="#step-address" role="tab" id="step-address-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="file-plus" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">육아 상담 추가</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- Wizard ends -->
+	            	<div class="bs-stepper-content">
+	                        <!-- Checkout Place order starts -->
+	                        <div id="step-cart" class="content" role="tabpanel" aria-labelledby="step-cart-trigger">
+	                            <div id="place-order" class="list-view product-checkout">
+	                                <!-- Checkout Place Order Left starts -->
+	                                <div class="checkout-items">
+	                                	<th:block th:if="${babyQnaList !=null}" th:each="babyQna : ${babyQnaList}">
+											<div class="card ecommerce-card">
+											
+												<div class="item-img">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<div th:text="${babyQna.mbsIdx}"></div>&nbsp;&nbsp;&nbsp;
+													<a th:href="|/admin/baby/babyQnaDetail?mbsIdx=${babyQna.mbsIdx}|">
+														<img th:src="@{|/upload/admin/babyQna/${babyQna.mbsImage}|}" alt="img-placeholder" />
+													</a>
+												</div>
+												<div class="card-body">
+													
+													<div class="item-name">
+														<h6 class="mb-0"><a th:href="|/admin/baby/babyQnaDetail?mbsIdx=${babyQna.mbsIdx}|" class="text-body">[[${babyQna.mbsTitle}]]</a></h6>
+													</div>
+													<br><br>
+													<div class="item-quantity">
+														<span class="quantity-title" th:if="${babyQna.cateSk} == '1'">피부</span>&nbsp;
+														<span class="quantity-title" th:if="${babyQna.cateGh} == '1'">성장/건강</span>&nbsp;
+														<span class="quantity-title" th:if="${babyQna.cateBo} == '1'">체질</span>&nbsp;
+														<span class="quantity-title" th:if="${babyQna.cateDi} == '1'">질병</span>
+													</div>
+												</div>
+												<div class="item-options text-center">
+													<div class="item-wrapper">
+														<div class="item-cost">
+
+															<p class="card-text shipping">							
+																
+															</p>
+														</div>
+													</div>
+													<div class="d-flex flex-column">
+			                                            <label class="form-check-label mb-50" for="customSwitch3">육아정보 진열 여부</label>
+			                                            <div class="form-check form-check-primary form-switch">
+			                                                <input type="checkbox" th:id="'mbsActive'+${babyQna.mbsIdx}" th:checked="${babyQna.mbsActive.toString() == '1'}" class="form-check-input"/>
+			                                            </div>
+			                                        </div>
+			                                        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    												<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			                                        <script th:inline="javascript">
+														$(function(){
+														    $('#mbsActive[[${babyQna.mbsIdx}]]').change(function(){
+														    	
+														    	if($('#mbsActive[[${babyQna.mbsIdx}]]').is(":checked")){
+														    		$.ajax({
+														    			url: "/admin/baby/babyQnaActive?mbsIdx=[[${babyQna.mbsIdx}]]&display=1",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("육아정보 진열에 실패하였습니다.");
+														    					$("input:checkbox[id='mbsActive[[${babyQna.mbsIdx}]]']").attr("checked", false);
+														    					return false;
+														    				}
+														    				alert("육아정보 진열에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='mbsActive[[${babyQna.mbsIdx}]]']").attr("checked", false);
+														    				return false;
+														    			}
+														    		});
+														            
+														        }else{
+														        	$.ajax({
+														    			url: "/admin/baby/babyQnaActive?mbsIdx=[[${babyQna.mbsIdx}]]&display=0",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("육아정보 진열 해제에 실패하였습니다.");
+														    					$("input:checkbox[id='mbsActive[[${babyQna.mbsIdx}]]']").attr("checked", true);
+														    					return false;
+														    				}
+														    				alert("육아정보 진열 해제에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='mbsActive[[${babyQna.mbsIdx}]]']").attr("checked", true);
+														    				return false;
+														    			}
+														    		});
+														        } 
+														    });
+														});
+													</script>
+													<div class="d-flex flex-column">
+			                                            <label class="form-check-label mb-50" for="customSwitch3">메인화면 진열 여부</label>
+			                                            <div class="form-check form-check-primary form-switch">
+			                                                <input type="checkbox" th:id="'mbsCheck'+${babyQna.mbsIdx}" th:checked="${babyQna.mbsCheck.toString() == '1'}" class="form-check-input"/>
+			                                            </div>
+			                                        </div>
+			                                        <script th:inline="javascript">
+														$(function(){
+														    $('#mbsCheck[[${babyQna.mbsIdx}]]').change(function(){
+														    	
+														    	if($('#mbsCheck[[${babyQna.mbsIdx}]]').is(":checked")){
+														    		$.ajax({
+														    			url: "/admin/baby/babyQnaCheck?mbsIdx=[[${babyQna.mbsIdx}]]&display=1",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("메인화면 진열에 실패하였습니다.");
+														    					$("input:checkbox[id='mbsCheck[[${babyQna.mbsIdx}]]']").attr("checked", false);
+														    					return false;
+														    				}
+														    				alert("메인화면 진열에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='mbsCheck[[${babyQna.mbsIdx}]]']").attr("checked", false);
+														    				return false;
+														    			}
+														    		});
+														        }else{
+														        	$.ajax({
+														    			url: "/admin/baby/babyQnaCheck?mbsIdx=[[${babyQna.mbsIdx}]]&display=0",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("메인화면 진열 해제에 실패하였습니다.");
+														    					$("input:checkbox[id='mbsCheck[[${babyQna.mbsIdx}]]']").attr("checked", true);
+														    					return false;
+														    				}
+														    				alert("메인화면 진열 해제에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='mbsCheck[[${babyQna.mbsIdx}]]']").attr("checked", true);
+														    				return false;
+														    			}
+														    		});
+														        } 
+														    });
+														});
+													</script>
+												</div>
+											</div>
+										</th:block>
+	                                </div>
+	                                <!-- Checkout Place Order Left ends -->
+
+	                                <!-- Checkout Place Order Right starts -->
+	                                <div class="checkout-options">
+	                                    
+	                                  
+	                                </div>
+	                                <!-- Checkout Place Order Right ends -->
+	                                <!-- E-commerce Pagination Starts -->
+				                    <section id="ecommerce-pagination">
+				                        <!-- Dynamic Pagination with last & first starts -->
+                        
+		                                <div class="card-body">
+		                                    <ul class="pagination firstLast1-links"></ul>
+		                                </div>
+		                            
+		                        		<!-- Dynamic Pagination with last & first ends -->
+				                    </section>
+				                    
+				                    <!-- E-commerce Pagination Ends -->
+	                            </div>
+	                            <!-- Checkout Place order Ends -->
+	                        </div>
+	                        <!-- Checkout Customer Address Starts -->
+	                        <div id="step-address" class="content" role="tabpanel" aria-labelledby="step-address-trigger">
+	                            <br>
+	                                <!-- Checkout Customer Address Left starts -->
+	                                <div class="card">
+	                                    
+	                                    <!-- full Editor start -->
+						                <section class="full-editor">
+						                    <div class="row">
+						                        <div class="col-12">
+						                            <div class="card">
+						                            
+							                            <form th:object="${BabyQnaDTO}" th:action="@{/admin/baby/babyQnaRegist}" method="post" enctype="multipart/form-data" onsubmit="return registerBabyQna()">
+							                                <div class="card-body">
+							                                	<label for="mbsTitle" class="form-label">타이틀</label>
+							                                    <input type="text" class="form-control" name="mbsTitle" id="mbsTitle" value=""/><br><br>
+							                                    <input type="hidden" class="form-control" name="mbsContent" id="mbsContent" value=""/>
+							                                    <div class="row">
+							                                        <div class="col-sm-12">
+							                                            <div id="full-wrapper">
+							                                                <div id="full-container">
+							                                                    <div class="editor"></div>
+							                                                </div>
+							                                            </div>
+							                                        </div><br><br><br>
+							                                        
+							                                        <div class="col-lg-6 col-md-12 mb-1 mb-sm-0">
+							                                            <label for="formFile" class="form-label">썸네일 사진 첨부</label>
+							                                            <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="fileName" name="fileName"/>
+							                                        </div>
+							                                    </div><br><br>
+							                                    <div class="mb-1">
+							                                        <label class="form-label" for="mbsCategory">카테고리</label>
+							                                        <div class="form-check form-check-inline">
+							                                            <input class="form-check-input" type="checkbox" name="cateSk" id="cateSk" value="1" />
+							                                            <label class="form-check-label" for="cateSk">피부</label>
+							                                        </div>
+							                                        <div class="form-check form-check-inline">
+							                                            <input class="form-check-input" type="checkbox" name="cateGh" id="cateGh" value="1" />
+							                                            <label class="form-check-label" for="cateGh">성장/건강</label>
+							                                        </div>
+							                                        <div class="form-check form-check-inline">
+							                                            <input class="form-check-input" type="checkbox" name="cateBo" id="cateBo" value="1" />
+							                                            <label class="form-check-label" for="cateBo">체질</label>
+							                                        </div>
+							                                        <div class="form-check form-check-inline">
+							                                            <input class="form-check-input" type="checkbox" name="cateDi" id="cateDi" value="1" />
+							                                            <label class="form-check-label" for="cateDi">질병</label>
+							                                        </div>
+							                                    </div><br>
+																육아정보 진열 여부&nbsp;&nbsp;
+							                                    <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="mbsActive" id="mbsActive" value="1" checked />
+						                                            <label class="form-check-label" for="babyActive">활성</label>
+						                                        </div>
+						                                        <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="mbsActive" id="mbsActive2" value="0" />
+						                                            <label class="form-check-label" for="babyActive2">비활성</label>
+						                                        </div><br><br>
+																메인화면 진열 여부&nbsp;&nbsp;
+						                                        <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="mbsCheck" id="mbsCheck" value="1" checked />
+						                                            <label class="form-check-label" for="mainActive">활성</label>
+						                                        </div>
+						                                        <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="mbsCheck" id="mbsCheck2" value="0" />
+						                                            <label class="form-check-label" for="mainActive2">비활성</label>
+						                                        </div>
+							                                </div>
+							                                <input type="submit" class="btn btn-outline-primary" value="  등록   "></input>
+							                            </form>
+						                                
+						                            </div>
+						                        </div>
+						                    </div>
+						                </section>
+						                <!-- full Editor end -->
+	                                    
+	                                </div>
+	                                <!-- Checkout Customer Address Left ends -->	                            
+	                        </div>
+	                        <!-- Checkout Customer Address Ends -->
+	                      
+	                       
+	                    </div>
+	                </div>
+            	</div>
+            </div>
+        </div>
+    
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

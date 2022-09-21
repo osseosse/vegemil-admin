@@ -1,0 +1,28 @@
+package com.vegemil.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class AdminController {
+
+	@RequestMapping(value = "/admin/index")
+	public String adminIndex() {
+		// View attribute
+	    return "admin/index1";
+	}
+	/*
+	@RequestMapping(value = "/admin/{viewName}")
+    public String adminMain(@PathVariable(value = "viewName", required = false) String viewName)throws Exception{
+		// View attribute
+		return "admin/"+viewName;
+    }
+	*/
+	@RequestMapping(value = "/admin/login")
+    public String adminLogin()throws Exception{
+		return "/admin/auth/login";
+    }
+	
+}

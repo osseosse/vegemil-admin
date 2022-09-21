@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminRecruitMapper">
+
+	<!-- cp뉴스리스트 -->
+	<sql id="setupColumns">
+		  s_th
+		, s_title
+		, s_company
+		, s_type
+		, s_startdate
+		, s_enddate
+		, s_1
+		, s_2
+		, s_3
+		, s_close
+		, s_insertdate
+		, s_modifydate
+		, s_category
+		, s_category2
+		, s_collect
+	</sql>
+	
+	<select id="selectRecruitList" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			<include refid="setupColumns" />
+		FROM
+			R_Setup
+		WHERE
+			s_close = '1'
+		ORDER BY
+			s_th DESC
+	</select>
+	
+	<select id="selectVolunteerData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			 COUNT(*) AS totalCount
+			,COUNT(CASE WHEN memSex='남' THEN 1 END) AS maleCount
+			,COUNT(CASE WHEN memSex='여' THEN 1 END) AS femaleCount
+			,COUNT(CASE WHEN joinCareer='신입' THEN 1 END) AS juniorCount
+			,COUNT(CASE WHEN joinCareer='경력' THEN 1 END) AS seniorCount
+			,COUNT(CASE WHEN joinCompany1='정식품' THEN 1 END) AS chungCount
+			,COUNT(CASE WHEN joinCompany1='자연과사람들' THEN 1 END) AS nnpCount
+			,COUNT(CASE WHEN joinCompany1='오쎄' THEN 1 END) AS osseCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+	</select>
+	
+	<select id="selectDateApplyData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			 joinDate
+			,count(*) AS dateCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+		GROUP BY
+			joinDate
+		ORDER BY
+			joinDate
+	</select>
+	
+	<select id="selectFieldData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			 joinField1
+			,joinCompany1
+			,joinCareer
+			,count(*) AS fieldCount
+		FROM
+			R_Recruit
+		WHERE
+			setup_th = #{sTh}
+		GROUP BY
+			joinField1
+		ORDER BY
+			joinCompany1 DESC
+	</select>
+</mapper>

@@ -1,0 +1,23 @@
+//- =========================================================================================
+    File Name: documentation-aggrid.pug
+    Description: AgGrid Documentation page
+    ----------------------------------------------------------------------------------------
+    Item Name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+    ==========================================================================================-//
+
+extends template
+
+block pageVars
+    - var pageTitle    = "AgGrid"
+    - var activeMenu   = "agGrid"
+
+
+append breadcrumbs
+    +breadcrumbs([{url:"index.html",name:"Home"}, {name:"Tables"}, {name:"AgGrid"}])
+
+
+//- Include page content in content block
+append content
+    include ../contents/documentation-aggrid.html

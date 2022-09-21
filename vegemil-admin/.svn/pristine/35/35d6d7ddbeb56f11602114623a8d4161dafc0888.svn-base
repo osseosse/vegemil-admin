@@ -1,0 +1,5 @@
+#MyBatis
+mybatis.configuration.map-underscore-to-camel-case=true
+
+#Gson HTTP Message Converter 설정
+spring.http.converters.preferred-json-mapper=gson

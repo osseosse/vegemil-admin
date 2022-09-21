@@ -1,0 +1,24 @@
+package com.vegemil.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class AdminController {
+
+	@RequestMapping(value = "/admin/index")
+	public String adminIndex(Model model) {
+		// View attribute
+		model.addAttribute("template", "admin/main");
+	    return "admin/index";
+	}
+	
+	@RequestMapping(value = "/admin/home")
+    public String adminMain(Model model)throws Exception{
+		// View attribute
+		model.addAttribute("template", "admin/main");
+		return "admin/index";
+    }
+	
+}
