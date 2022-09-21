@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>사랑의 온도계 관리</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css}">
+		
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-flat-pickr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-invoice.css}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+		<script th:src="@{/app-assets/vendors/js/forms/repeater/jquery.repeater.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js}"></script>
+		<script th:src="@{/app-assets/js/scripts/pages/app-invoice.js}"></script>  
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-body">
+                <section class="invoice-edit-wrapper">
+                    <div class="row invoice-edit">
+                        <!-- Invoice Edit Left starts -->
+                        <div class="col-xl-9 col-md-8 col-12">
+                            <div class="card invoice-preview-card">
+                                <!-- Header starts -->
+                                <div class="card-body invoice-padding pb-0">
+                                    <div class="d-flex justify-content-between flex-md-row flex-column invoice-spacing mt-0">
+                                        <div>
+                                            <div class="logo-wrapper">
+                                                <h3 class="text-primary invoice-logo"><img th:src="@{|/img/event/loveBean.png|}" alt="loveBean" />사랑의 온도계</h3>
+                                            </div>
+                                            <p class="card-text mb-25"></p>
+                                            <p class="card-text mb-25">
+                                            	<div class="invoice-number-date mt-md-0 mt-2">
+		                                            <div class="d-flex align-items-center justify-content-md-end mb-1">
+		                                                <h4 class="invoice-title">현재 온도</h4>
+		                                                <div class="input-group input-group-merge invoice-edit-input-group">
+		                                                    <div class="input-group-text">
+		                                                        <i data-feather="thermometer"></i>
+		                                                    </div>
+		                                                    <input type="text" id="temperature" class="form-control invoice-edit-input" th:placeholder="${temperature}" />
+		                                                </div>
+		                                            </div>
+		                                        </div>
+                                            </p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <!-- Header ends -->
+
+                                <hr class="invoice-spacing" />
+
+                                <!-- Address and Contact starts -->
+                                <div class="card-body invoice-padding pt-0">
+                                    <div class="row invoice-spacing">
+                                        <div class="col-xl-8 p-0">
+                                            <h6 class="mb-2"></h6>
+                                            <h6 class="mb-25"></h6>
+                                            <p class="card-text mb-25"></p>
+                                            <p class="card-text mb-25"></p>
+                                            <p class="card-text mb-25"></p>
+                                            <p class="card-text mb-0"></p>
+                                        </div>
+                                        <div class="col-xl-4 p-0 mt-xl-0 mt-2">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Address and Contact ends -->
+
+                            </div>
+                        </div>
+                        <!-- Invoice Edit Left ends -->
+
+                        <!-- Invoice Edit Right starts -->
+                        <div class="col-xl-3 col-md-4 col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <button type="button" onclick="changeTemperture()" class="btn btn-outline-primary w-100 mb-75">Save</button>
+                                    <script>
+                                    	function changeTemperture(){
+                                    		if($('#temperature').val() == ''){
+                                    			alert("현재온도를 입력해주세요.");
+						    					return false;
+                                    		}
+                                    		$.ajax({
+								    			url: "/admin/event/changeTemperature?temperature=" + $('#temperature').val(),
+								    			type: "GET",
+								    			success: function(response) {
+								    				if (response.result == false) {
+								    					alert("현재온도 변경에 실패하였습니다.");
+								    					return false;
+								    				}
+								    				alert("현재온도 변경에 성공하였습니다.");
+								    				window.location.reload();
+								    			},
+								    			error: function(xhr, status, error) {
+								    				alert("에러가 발생하였습니다.");
+								    				return false;
+								    			}
+								    		});
+                                    	}
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Invoice Edit Right ends -->
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

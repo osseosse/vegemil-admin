@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>불공정거래 신고</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/extensions/ext-component-toastr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-quill-editor.css}">
+		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/katex.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/monokai-sublime.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/quill.snow.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/editors/quill/quill.bubble.css}">
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/extensions/toastr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.twbsPagination.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/katex.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/highlight.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/editors/quill/quill.min.js}"></script>
+	    
+	    
+	    <script th:src="@{/js/admin/components-pagination.js}"></script>
+	    
+	    <script>
+	    	$('input:radio[name=cCheck]').click(function(){
+	    		var check = $('input[name=cCheck]:checked').val();
+	    		
+	    		location.href="/admin/cs/unfairClaimUpdateCheck?cIdx=" + '[[ ${claimDetail.cIdx} ]]' + "&cCheck="+check;
+	    		
+	    	});
+		    $('input[name=cIdx]').attr('value','[[ ${claimDetail.cIdx} ]]');
+		    $('#cAnswer').val('[[ ${claimDetail.cAnswer} ]]');
+		    $('input:radio[name=cCheck]:radio[value="[[${claimDetail.cCheck}]]"]').prop('checked',true);
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ecommerce-application">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+        	<div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">불공정거래 신고</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                    <div class="mb-1 breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+    			
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                	<form th:object="${CsDTO}" th:action="@{/admin/cs/unfairClaimUpdate}" method="post" enctype="multipart/form-data">
+	                                	<input type="hidden" class="form-control" name="cIdx" id="cIdx" value=""/>
+	                                	
+	                                	<h2 class="text-danger" th:text="${claimDetail.cCheck}=='0' ? '접수중' : '완료'"></h2>
+	                                	<label class="form-label">작성일자 : [[ ${claimDetail.cWritedate} ]]</label><br>
+	                                	<label class="form-label">작성자 : [[ ${claimDetail.cName} ]]</label><br>
+	                                	<label class="form-label">휴대전화 : [[ ${claimDetail.cHp} ]]</label><br>
+	                                	<label class="form-label">이메일 : [[ ${claimDetail.cEmail} ]]</label><br>
+	                                	<label class="form-label">제목 : [[ ${claimDetail.cSubject} ]]</label><br>
+	                                	<label class="form-label">내용 : [[ ${claimDetail.cContent} ]]</label><br>
+	                                	<label class="form-label" for="answer">답 변</label>
+                                        <textarea class="form-control" id="cAnswer" name="cAnswer" rows="6" placeholder="답변을 입력하세요."></textarea><br>
+	                                	
+										<input type="submit" class="btn btn-outline-primary" value="  등록   "></input>&nbsp;
+										<a th:href="|@/admin/cs/unfairClaimDelete?cIdx=${claimDetail.cIdx}|">
+											<button type="submit" class="btn btn-outline-danger">
+												<i data-feather="trash-2"></i><span>삭제</span>
+											</button>
+										</a>&nbsp;&nbsp;&nbsp;
+										<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                                            <input type="radio" class="btn-check" name="cCheck" id="ing" value="0" autocomplete="off" />
+                                            <label class="btn btn-outline-primary" for="ing">접수중</label>
+
+                                            <input type="radio" class="btn-check" name="cCheck" id="complete" value="1" autocomplete="off" />
+                                            <label class="btn btn-outline-primary" for="complete">처리완료</label>
+                                        </div>
+							        </form>
+								</div> 
+							</div>
+						</div>
+					
+				<!-- full Editor end -->
+		    </div>
+		</div>            
+	</div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

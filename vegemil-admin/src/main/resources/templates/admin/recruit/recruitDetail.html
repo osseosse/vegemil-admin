@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	
+	<th:block layout:fragment="title">
+		<title>지원자 이력서</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+	    <link rel="shortcut icon" type="image/x-icon" th:href="@{/app-assets/images/ico/favicon.ico}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/subRecruit.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:inline="javascript">
+		    function FIRST_SET(){
+				alert("1. 인쇄 미리보기 - 실행 (파일메뉴 or 오른쪽 마우스버튼)\n\n"+
+				"2. 페이지 설정 - 실행\n"+
+				"   - 배경색 및 이미지 인쇄 - 체크\n"+
+				"   - 크기에 맞게 축소 사용 - 체크\n"+
+				"   - 머릿글/바닥글 - 모두 비어있음 선택\n"+
+				"   - 여백 - 모든 방향 10~15정도 지정\n\n"+
+				"3. 페이지 - 총 3페이지 인쇄 되도록 설정 변경\n\n"+
+				"4. 인쇄 시작");
+				
+				var var_forState = "";
+					var var_licName = "";
+					var var_status = "";
+						
+					for(var i=1; i<=4;i++){
+					
+						var_forState = $("#lab_forState" + i ).text(); 
+						
+						if(var_forState == ""){
+							$("#tr_forState" + i ).css("display", "none");
+						}
+						else{	
+							$("#tr_forState" + i ).css("display", "");
+						}
+					}
+					
+					for(var i=1; i<=6;i++){
+					
+						var_licName =  $("#lab_licName" + i).text();
+						
+						if(var_licName == ""){
+							$("#tr_licName" + i ).css("display", "none");
+						}else{	
+							$("#tr_licName" + i ).css("display", "");
+						}
+					}
+					
+			}
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    	<div id="wrap750">
+				<p class="printTitle">입사지원서</p>
+				<!-- 1.지원사항 ########################################-->
+				<div id="field">
+					<div class="title">지원사항</div>
+					<table width="100%" class="tbViewType2" summary="1.지원사항">
+						<colgroup>
+							<col width="18%" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="hool" rowspan=6>
+									<div class="imgPhotoBack">
+										<img id="img_memPhoto" class="imgPhotoView" src="https://www.vegemil.co.kr:10001/upload/RECRUIT/42th/20211213132838609131395441.jpg" />
+									</div>
+								</td>
+								<th rowspan=3><div class="hool">성명</div></th>
+								<td class="hool">한글</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameK">이민주</span></td>
+							</tr>
+							<tr>
+								<td class="hool">한자</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameH"></span></td>
+							</tr>
+							<tr>
+								<td class="hool">영문</td>
+								<td colspan="5" class="bora2"><span id="lab_memNameE">LEELEELEELEE</span></td>
+							</tr>
+							<tr>
+								<th><div class="hool">생일/성별</div></th>
+								<td colspan="3" class="hool"><span id="lab_memJumin">1984 - 02 - 02 / 남자</span></td>
+								<th><div class="hool">연령</div></th>
+								<td class="bora4">만 <span id="lab_memAge">37</span>세</td>
+							</tr>
+							<tr>
+								<th rowspan="2"><div class="hool">응시분야</div></th>
+								<td colspan="1" class="hool">지원 구분</td>
+								<td colspan="2" class="hool">1 지망</td>
+								<td colspan="2" class="bora6">2 지망</td>
+							</tr>
+							<tr>
+								<td colspan="1" class="hool"> 
+									<span id="lab_career"></span> </td>
+								<td colspan="2" class="hool">
+									<span id="lab_joinField1">경영지원</span>
+									(희망근무지: <span id="lab_joinArea1">서울</span>)</td>
+								<td colspan="2" class="bora6">
+									<span id="lab_joinField2">경영지원</span>
+									(희망근무지: <span id="lab_joinArea2">선택</span>)</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 1.지원사항 ########################################-->
+				
+				<!-- 2.인적사항 ########################################-->
+				<div id="man">
+					<div class="title">인적사항</div>
+					<table width="100%" class="tbViewType2" summary="1.지원사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="17%" >
+							<col width="10%" >
+							<col width="17%" >
+							<col width="10%" >
+							<col width="26%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="para"><strong>현 주소</strong></div></th>
+								<td colspan="5" class="bora4">
+									<span id="lab_memAddr21">경기도 용인시 기흥구 기흥역로 9 (구갈동, 기흥역 롯데캐슬 레이시티/주상복합)</span>
+									<span id="lab_memAddr22">333-333</span>
+									&nbsp;(우:<span id="lab_memZip2">17065</span>)
+								</td>
+							</tr>
+							<tr>
+								<th><div class="para"><strong>집 전화</strong></div></th>
+								<td class="bora5"><span id="lab_memTel"></span></td>
+								<th><div class="hool">휴대전화</div></th>
+								<td class="bora5"><span id="lab_memHp">010-9074-3076</span></td>
+								<th><div class="hool">이메일</div></th>
+								<td class="bora4"><span id="lab_memEmail">jadepost@naver.com</span></td>
+							</tr>
+							<tr>
+								<th><div class="para"><strong>보훈여부</strong></div></th>
+								<td class="bora5"><span id="lab_memBohun">비대상</span></td>
+							
+								<!-- 보훈번호 -->
+								<th><div class="hool">보훈번호</div></th>
+								<td class="bora3">
+									<span id="lab_memFamMemd" maxlength="15">22222</span>
+								</td>
+								
+								<th><div class="hool">형제관계</div></th>
+								<td class="bora4">
+									<span id="lab_memFamMem1">1남</span>
+									<span id="lab_memFamMem2">1녀</span>
+									<span id="lab_memFamMem3">1째</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 2.인적사항 ########################################-->
+				
+				<!-- 11.가족사항(본인제외) ########################################-->
+				<div id="fam">
+					<div class="title">가족사항(본인제외)</div>
+					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
+						<colgroup>
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+							<col width="11%" />
+							<col width="12%" />
+							<col width="11%" />
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+								<th><div class="hool"><strong>관계</strong></div></th>
+								<th><div class="hool"><strong>성명</strong></div></th>
+								<th><div class="hool"><strong>연령(만)</strong></div></th>
+							</tr>
+							<!-- 가족구성 1~3 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_famCon1">부</span></td>
+								<td class="hool"><span id="lab_famName1">홍길동</span></td>
+								<td class="hool"><span id="lab_famAge1">64</span></td>
+							
+							
+								<td class="hool"><span id="lab_famCon2">형</span></td>
+								<td class="hool"><span id="lab_famName2">홍홍홍11</span></td>
+								<td class="hool"><span id="lab_famAge2">11</span></td>
+							
+							
+								<td class="hool"><span id="lab_famCon3"></span></td>
+								<td class="hool"><span id="lab_famName3"></span></td>
+								<td class="hool"><span id="lab_famAge3"></span></td>
+								
+							</tr>
+							<!-- 가족구성 4~6 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_famCon4">부</span></td>
+								<td class="hool"><span id="lab_famName4">홍길순</span></td>
+								<td class="hool"><span id="lab_famAge4">69</span></td>
+								
+							
+								<td class="hool"><span id="lab_famCon5"></span></td>
+								<td class="hool"><span id="lab_famName5"></span></td>
+								<td class="hool"><span id="lab_famAge5"></span></td>
+								
+								<td class="hool"><span id="lab_famCon6"></span></td>
+								<td class="hool"><span id="lab_famName6"></span></td>
+								<td class="hool"><span id="lab_famAge6"></span></td>
+						
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 11.가족사항(본인제외) ########################################-->
+				
+				<!-- 10.병역사항 ########################################-->
+				<div id="military">
+					<div class="title">병역사항</div>
+					<table width="100%" class="tbViewType2" summary="10.병역사항">
+						<colgroup>
+							<col width="20%">
+							<col width="17%" >
+							<col width="12%" >
+							<col width="8%" >
+							<col width="8%" >
+							<col width="8%" >
+							<col width="12%" >
+							<col width="15%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>병역구분</strong></div></th>
+								<td class="bora3"><span id="lab_milClass">군필</span></td>
+								<th width=110><div class="hool"><strong>면제사유</strong></div></th>
+								<td colspan="5" class="bora2"><span id="lab_milReason"></span></td>
+							</tr>
+							<tr>
+								<th><div class="hool"><strong>군별</strong></div></th>
+								<td class="bora3"><span id="lab_milType">육군</span></td>
+								<th><div class="hool"><strong>계급</strong></div></th>
+								<td class="hool"><span id="lab_milLv">병장</span></td>
+								<th width=110><div class="hool"><strong>병과</strong></div></th>
+								<td class="hool"><span id="lab_milArm">보병</span></td>
+								<th width=110><div class="hool"><strong>복무월수</strong></div></th>
+								<td class="bora"><span id="lab_milMCount">24개월</span></td>
+							</tr>
+							<tr>
+								<th><div class="hool"><strong>제대구분</strong></div></th>
+								<td class="bora3"><span id="lab_milTicket">만기제대(병장,부사관,장교)</span></td>
+								<th><div class="hool"><strong>복무기간</strong></div></th>
+								<td colspan="5" class="bora2"><span id="lab_milSDate1">2004-01</span><span id="lab_milEDate1"> ~ 2006-01</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 10.병역사항 ########################################-->
+
+				<!-- 12.개인신상 ########################################-->
+				<div id="hobby">
+					<div class="title">개인신상</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="20%" >
+							<col width="30%" >
+							<col width="30%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>종교</strong></div></th>
+								<th><div class="hool"><strong>장애 여부</strong></div></th>
+								<th><div class="hool"><strong>특기</strong></div></th>
+								<th class="thbora"><strong>취미</strong></th>
+							</tr>
+							<tr>
+								<td class="hool"><span id="lab_memReligion">무교</span></td>
+								<td class="hool"><span id="lab_memHandicap">비장애</span></td>
+								<td class="hool"><span id="lab_memAbility">수영</span></td>
+								<td class="bora"><span id="lab_memLike">사이클</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 12.개인신상 ########################################-->
+				
+				<!--  3.학력사항 ########################################-->
+				<div id="school" clear="all" style="PAGE-BREAK-BEFORE:always; MARGIN-TOP:20px">
+					<div class="title">학력사항</div>
+					<table width="100%" class="tbViewType2" summary="3.학력사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="10%" >
+							<col width="10%" >
+							<col width="10%" >
+							<col width="9%" >
+							<col width="*" >
+							<col width="7%" >
+							<col width="7%" >
+							<col width="10%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="para"><strong>구분</strong></div></th>
+								<th><div class="hool">학교명</div></th>
+								<th><div class="hool">입학년월</div></th>
+								<th><div class="hool">졸업년월</div></th>
+								<th><div class="hool">졸업유무</div></th>
+								<th><div class="hool">계열 / 전공</div></th>
+								<th><div class="hool">소재지</div></th>
+								<th><div class="hool">주/야</div></th>
+								<th><div class="hool">평점/만점</div></th>
+							</tr>
+							<tr><!-- 고등학교 -->
+								<th><div class="para"><strong>고등학교</strong></div></th>
+								<td class="hool"><span id="lab_schName1">홍홍</span></td>
+								<td class="hool"><span id="lab_schEnterYM1">1111-</span></td>
+								<td class="hool"><span id="lab_schGradYM1">2222-01</span></td>
+								<td class="hool"><span id="lab_schGrad1">졸업</span></td>
+								<td class="hool"><span id="lab_schAdmis1">상경</span>/<span id="lab_schMajor1">ㅇㅇㅇ</span></td>
+								<td class="hool"><span id="lab_schSite1">대구</span></td>
+								<td class="hool"><span id="lab_schNight1">주간</span></td>
+								<td class="bora"></td>
+							</tr><!-- 고등학교 //-->
+							<tr><!-- 편입전대학(교) -->
+								<th><div class="para"><strong>편입전 대학(교)</strong></div></th>
+								<td class="hool"><span id="lab_schName2">홍홍</span></td>
+								<td class="hool"><span id="lab_schEnterYM2">2222-</span></td>
+								<td class="hool"><span id="lab_schGradYM2">2222-02</span></td>
+								<td class="hool"><span id="lab_schGrad2">졸업</span></td>
+								<td class="hool"><span id="lab_schAdmis2">법정</span>/<span id="lab_schMajor2">ㅇㅇ</span></td>
+								<td class="hool"><span id="lab_schSite2">대구</span></td>
+								<td class="hool"><span id="lab_schNight2">주간</span></td>
+								<td class="bora"><span id="lab_schPointEvg2">33</span> / <span id="lab_schPointMax2">4.5</span></td>
+							</tr><!-- 편입전대학(교) // -->
+							<tr><!-- 대학(2~3년제) -->
+								<th><div class="para"><strong>대학(2~3년제)</strong></div></th>
+								<td class="hool"><span id="lab_schName3">홍홍</span></td>
+								<td class="hool"><span id="lab_schEnterYM3">1111-</span></td>
+								<td class="hool"><span id="lab_schGradYM3">2222-01</span></td>
+								<td class="hool"><span id="lab_schGrad3">졸업</span></td>
+								<td class="hool"><span id="lab_schAdmis3">상경</span>/<span id="lab_schMajor3">ㅇㅇㅇ</span></td>
+								<td class="hool"><span id="lab_schSite3">대구</span></td>
+								<td class="hool"><span id="lab_schNight3">야간</span></td>
+								<td class="bora"><span id="lab_schPointEvg3">33</span> / <span id="lab_schPointMax3">4.5</span></td>
+							</tr><!-- 대학(2~3년제) //-->
+							<tr><!-- 대학(2~3년제) -->
+								<th><div class="para"><strong>대학(해외)</strong></div></th>
+								<td class="hool"><span id="lab_schNameAB"></span></td>
+								<td class="hool"><span id="lab_schEnterYMAB"></span></td>
+								<td class="hool"><span id="lab_schGradYMAB"></span></td>
+								<td class="hool"><span id="lab_schGradAB"></span></td>
+								<td class="hool"><span id="lab_schAdmisAB"></span>/<span id="lab_schMajorAB"></span></td>
+								<td class="hool"><span id="lab_schSiteAB"></span></td>
+								<td class="hool"><span id="lab_schNightAB"></span></td>
+								<td class="bora"><span id="lab_schPointEvgAB"></span> / <span id="lab_schPointMaxAB"></span></td>
+							</tr><!-- 대학(2~3년제) //-->
+							<tr><!-- 대학교(4~6년제) -->
+								<th><div class="para"><strong>대학교(4~6년제)</strong></div></th>
+								<td class="hool"><span id="lab_schName4">경남대</span></td>
+								<td class="hool"><span id="lab_schEnterYM4">222-</span></td>
+								<td class="hool"><span id="lab_schGradYM4">2222-02</span></td>
+								<td class="hool"><span id="lab_schGrad4"></span></td>
+								<td class="hool"><span id="lab_schAdmis4">인문</span>/<span id="lab_schMajor4">국어교육과</span></td>
+								<td class="hool"><span id="lab_schSite4">대구</span></td>
+								<td class="hool"><span id="lab_schNight4"></span></td>
+								<td class="bora"><span id="lab_schPointEvg4">33</span> / <span id="lab_schPointMax4">4.5</span></td>
+							</tr><!-- 대학교(4~6년제) //-->
+
+
+							<tr><!--  부/이중/복수 전공1 -->
+								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
+								<td class="hool"><span id="lab_sub1schName4">가야대</span></td>
+								<td colspan="3"></td>
+								<td class="hool"><span id="lab_sub1schAdmis4"></span>/<span id="lab_sub1schMajor4"> 선택 </span></td>
+								<td class="hool"><span id="lab_sub1schSite4"></span></td>
+								<td class="hool"><span id="lab_sub1schNight4"></span></td>
+								<td class="bora">  </td>
+							</tr><!--  부/이중/복수 전공1 //  -->
+								<tr><!--  부/이중/복수 전공2 -->
+								<th><div class="para"><strong>부/이중/복수 전공</strong></div></th>
+								<td class="hool"><span id="lab_sub2schName4"> 선택 </span></td>
+								<td colspan="3"></td>
+								<td class="hool"><span id="lab_sub2schAdmis4"></span>/<span id="lab_sub2schMajor4"> 선택 </span></td>
+								<td class="hool"><span id="lab_sub2schSite4"></span></td>
+								<td class="hool"><span id="lab_sub2schNight4"></span></td>
+								<td class="bora">  </td>
+							</tr><!--  부/이중/복수 전공2 //  -->
+
+							<tr><!-- 대학원(석사) -->
+								<th><div class="para"><strong>대학원(석사)</strong></div></th>
+								<td class="hool"><span id="lab_schName5"></span></td>
+								<td class="hool"><span id="lab_schEnterYM5"></span></td>
+								<td class="hool"><span id="lab_schGradYM5"></span></td>
+								<td class="hool"><span id="lab_schGrad5"></span></td>
+								<td class="hool"><span id="lab_schAdmis5"></span>/<span id="lab_schMajor5"></span></td>
+								<td class="hool"><span id="lab_schSite5"></span></td>
+								<td class="hool"><span id="lab_schNight5"></span></td>
+								<td class="bora"><span id="lab_schPointEvg5"></span> / <span id="lab_schPointMax5"></span></td>
+							</tr><!-- 대학원(석사) // -->
+							<tr><!-- 대학원(박사) -->
+								<th><div class="para"><strong>대학원(박사)</strong></div></th>
+								<td class="hool"><span id="lab_schName6"></span></td>
+								<td class="hool"><span id="lab_schEnterYM6"></span></td>
+								<td class="hool"><span id="lab_schGradYM6"></span></td>
+								<td class="hool"><span id="lab_schGrad6"></span></td>
+								<td class="hool"><span id="lab_schAdmis6"></span>/<span id="lab_schMajor6"></span></td>
+								<td class="hool"><span id="lab_schSite6"></span></td>
+								<td class="hool"><span id="lab_schNight6"></span></td>
+								<td class="bora"><span id="lab_schPointEvg6"></span> / <span id="lab_schPointMax6"></span></td>
+							</tr><!-- 대학원(박사) // -->
+							<tr>
+								<th><div class="para" ><strong>회계관련 이수내역</strong></div></th>
+								<td class="hool" colspan="8" >
+								<span id="lab_schAccount" style="text-align:left; padding:6px 10px"></span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- // 3.학력사항 ############################################ -->
+				<div id="anguage" style="margin-top:20px"><!-- 4.외국어사항 -->
+					<div class="title">외국어사항</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="15%" >
+							<col width="9%" >
+							<col width="7%" >
+							<col width="*" >
+							<col width="15%" >
+							<col width="6%" >
+							<col width="6%" >
+							<col width="6%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool">외국어</div></th>
+								<th><div class="hool">점수</div></th>
+								<th><div class="hool">등급</div></th>
+								<th><div class="hool">발급번호</div></th>
+								<th><div class="hool">취득일자</div></th>
+								<th><div class="hool">회화</div></th>
+								<th><div class="hool">작문</div></th>
+								<th><div class="hool">독해</div></th>
+							</tr>
+							<tr><!-- 외국어 1 -->
+								<td class="hool"><span id="lab_langName1">영어 TEPS</span></td>
+								<td class="hool"><span id="lab_langPoint1">4444</span></td>
+								<td class="hool"><span id="lab_langLv1"></span></td>
+								<td class="hool"><span id="lab_langLic1">55555</span></td>
+								<td class="hool"><span id="lab_langGet1">2222-02-02</span></td>
+								<td class="hool"><span id="lab_langTalk1">상</span></td>
+								<td class="hool"><span id="lab_langMake1">상</span></td>
+								<td class="bora"><span id="lab_langRead1">상</span></td>
+							</tr>
+							<tr> <!-- 외국어 2 -->
+								<td class="hool"><span id="lab_langName2">영어 TEPS</span></td>
+								<td class="hool"><span id="lab_langPoint2">4444</span></td>
+								<td class="hool"><span id="lab_langLv2"></span></td>
+								<td class="hool"><span id="lab_langLic2"></span></td>
+								<td class="hool"><span id="lab_langGet2">2222-01-01</span></td>
+								<td class="hool"><span id="lab_langTalk2">중</span></td>
+								<td class="hool"><span id="lab_langMake2">상</span></td>
+								<td class="bora"><span id="lab_langRead2">상</span></td>
+							</tr>
+							<tr> <!-- 외국어 3 -->
+								<td class="hool"><span id="lab_langName3">영어 TEPS</span></td>
+								<td class="hool"><span id="lab_langPoint3">444</span></td>
+								<td class="hool"><span id="lab_langLv3"></span></td>
+								<td class="hool"><span id="lab_langLic3"></span></td>
+								<td class="hool"><span id="lab_langGet3">2222-02-02</span></td>
+								<td class="hool"><span id="lab_langTalk3">상</span></td>
+								<td class="hool"><span id="lab_langMake3">상</span></td>
+								<td class="bora"><span id="lab_langRead3">상</span></td>
+							</tr>
+							<tr> <!-- 외국어 4 -->
+								<td class="hool"><span id="lab_langName4">영어 TEPS</span></td>
+								<td class="hool"><span id="lab_langPoint4">4444</span></td>
+								<td class="hool"><span id="lab_langLv4"></span></td>
+								<td class="hool"><span id="lab_langLic4"></span></td>
+								<td class="hool"><span id="lab_langGet4">2222-02-02</span></td>
+								<td class="hool"><span id="lab_langTalk4">상</span></td>
+								<td class="hool"><span id="lab_langMake4">상</span></td>
+								<td class="bora"><span id="lab_langRead4">중</span></td>
+							</tr>
+							<tr> <!-- 외국어 5 -->
+								<td class="hool"><span id="lab_langName5">영어 TOEFL</span></td>
+								<td class="hool"><span id="lab_langPoint5">444</span></td>
+								<td class="hool"><span id="lab_langLv5"></span></td>
+								<td class="hool"><span id="lab_langLic5"></span></td>
+								<td class="hool"><span id="lab_langGet5">3333-02-02</span></td>
+								<td class="hool"><span id="lab_langTalk5">중</span></td>
+								<td class="hool"><span id="lab_langMake5">상</span></td>
+								<td class="bora"><span id="lab_langRead5">상</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- 4.외국어사항 //-->
+
+				<div id="it"style="margin-top:20px"><!-- 5.IT능력 -->
+					<div class="title">IT능력</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="13%" >
+							<col width="20%" >
+							<col width="13%" >
+							<col width="20%" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+								<th><div class="hool"><strong>S·W명</strong></div></th>
+								<th><div class="hool"><strong>수준</strong></div></th>
+							</tr>
+							<tr>
+								<td class="bora"><span id="lab_swName1">한글</span></td>
+								<td class="hool"><span id="lab_swLv1">상</span></td>
+								<td class="bora"><span id="lab_swName2">한글</span></td>
+								<td class="hool"><span id="lab_swLv2">상</span></td>
+								<td class="bora"><span id="lab_swName3">한글</span></td>
+								<td class="bora"><span id="lab_swLv3">상</span></td>
+							</tr>
+							<tr>
+								<td class="bora"><span id="lab_swName4">한글</span></td>
+								<td class="hool"><span id="lab_swLv4">상</span></td>
+								<td class="bora"><span id="lab_swName5">한글</span></td>
+								<td class="hool"><span id="lab_swLv5">중</span></td>
+								<td class="bora"><span id="lab_swName6">한글</span></td>
+								<td class="bora"><span id="lab_swLv6">상</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- 5.IT능력 //-->
+				
+				<!-- 8.경력/인턴 ########################################-->
+				<div id="career">
+					<div class="title">경력/인턴</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+							<col width="15%" >
+							<col width="10%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>회사명</strong></div></th>
+								<th><div class="hool"><strong>기간</strong></div></th>
+								<th><div class="hool"><strong>직무</strong></div></th>
+								<th><div class="hool"><strong>평균급여/월</strong></div></th>
+								<th><div class="hool"><strong>재직여부</strong></div></th>
+							</tr>
+							<!-- 경력 1 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName1">홍홍식품</span></td>
+								<td class="hool"><span id="lab_hisSDate1">2222-02</span><span id="lab_hisEDate1"> ~ 3333-01</span></td>
+								<td class="hool"><span id="lab_hisDuty1">홍홍</span></td>
+								<td class="hool"><span id="lab_hisPay1">444</span></td>
+								<td class="bora"><span id="lab_hisLv1">무</span></td>
+							</tr>
+							<!-- 경력 2 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName2">홍홍식품</span></td>
+								<td class="hool"><span id="lab_hisSDate2">2222-02</span><span id="lab_hisEDate2"> ~ 3333-02</span></td>
+								<td class="hool"><span id="lab_hisDuty2">홍홍</span></td>
+								<td class="hool"><span id="lab_hisPay2">444</span></td>
+								<td class="bora"><span id="lab_hisLv2">무</span></td>
+							</tr>
+							<!-- 경력 3 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName3">홍홍식품</span></td>
+								<td class="hool"><span id="lab_hisSDate3">2222-02</span><span id="lab_hisEDate3"> ~ 3333-01</span></td>
+								<td class="hool"><span id="lab_hisDuty3">홍홍</span></td>
+								<td class="hool"><span id="lab_hisPay3">444</span></td>
+								<td class="bora"><span id="lab_hisLv3">무</span></td>
+							</tr>
+							<!-- 경력 4 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName4">홍홍식품</span></td>
+								<td class="hool"><span id="lab_hisSDate4">222-01</span><span id="lab_hisEDate4"> ~ 3333-02</span></td>
+								<td class="hool"><span id="lab_hisDuty4">홍홍</span></td>
+								<td class="hool"><span id="lab_hisPay4">444</span></td>
+								<td class="bora"><span id="lab_hisLv4">무</span></td>
+							</tr>
+							<!-- 경력 5 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName5"></span></td>
+								<td class="hool"><span id="lab_hisSDate5"></span><span id="lab_hisEDate5"></span></td>
+								<td class="hool"><span id="lab_hisDuty5"></span></td>
+								<td class="hool"><span id="lab_hisPay5"></span></td>
+								<td class="bora"><span id="lab_hisLv5"></span></td>
+							</tr>
+							<!-- 경력 6 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName6"></span></td>
+								<td class="hool"><span id="lab_hisSDate6"></span><span id="lab_hisEDate6"></span></td>
+								<td class="hool"><span id="lab_hisDuty6"></span></td>
+								<td class="hool"><span id="lab_hisPay6"></span></td>
+								<td class="bora"><span id="lab_hisLv6"></span></td>
+							</tr>
+							<!-- 경력 7 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName7"></span></td>
+								<td class="hool"><span id="lab_hisSDate7"></span><span id="lab_hisEDate7"></span></td>
+								<td class="hool"><span id="lab_hisDuty7"></span></td>
+								<td class="hool"><span id="lab_hisPay7"></span></td>
+								<td class="bora"><span id="lab_hisLv7"></span></td>
+							</tr>
+							<!-- 경력 8 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName8"></span></td>
+								<td class="hool"><span id="lab_hisSDate8"></span><span id="lab_hisEDate8"></span></td>
+								<td class="hool"><span id="lab_hisDuty8"></span></td>
+								<td class="hool"><span id="lab_hisPay8"></span></td>
+								<td class="bora"><span id="lab_hisLv8"></span></td>
+							</tr>
+							<!-- 경력 9 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName9"></span></td>
+								<td class="hool"><span id="lab_hisSDate9"></span><span id="lab_hisEDate9"></span></td>
+								<td class="hool"><span id="lab_hisDuty9"></span></td>
+								<td class="hool"><span id="lab_hisPay9"></span></td>
+								<td class="bora"><span id="lab_hisLv9"></span></td>
+							</tr>
+							<!-- 경력 10 ---------------------->
+							<tr>
+								<td class="hool"><span id="lab_hisCoName10"></span></td>
+								<td class="hool"><span id="lab_hisSDate10"></span><span id="lab_hisEDate10"></span></td>
+								<td class="hool"><span id="lab_hisDuty10"></span></td>
+								<td class="hool"><span id="lab_hisPay10"></span></td>
+								<td class="bora"><span id="lab_hisLv10"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 8.경력/인턴 ########################################-->
+				
+				<!-- 7.해외연수활동 ########################################-->
+				<div id="country">
+					<div class="title">해외연수/대외활동</div>
+					<table width="100%" class="tbViewType2" >
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+							<col width="30%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>국가명/활동명</strong></div></th>
+								<th><div class="hool"><strong>연수/활동기간</strong></div></th>
+								<th><div class="hool"><strong>연수/활동기관</strong></div></th>
+								<th class="thbora"><strong>내용</strong></th>
+							</tr>
+							<!-- 연수 1 -->
+							<tr  id="tr_forState1"  style="display:none;" >
+								<td class="hool"><span id="lab_forState1">무무</span></td>
+								<td class="hool"><span id="lab_forSDate1">3333-01-01</span><span id="lab_forEDate1"> ~ 444-02-02</span></td>
+								<td class="hool"><span id="lab_forName1">4444</span></td>
+								<td class="bora"><span id="lab_forContent1">444</span></td>
+							</tr>
+							
+							<!-- 연수 2 -->
+							
+							<tr id="tr_forState2"  style="display:none;">
+								<td class="hool"><span id="lab_forState2"></span></td>
+								<td class="hool"><span id="lab_forSDate2"></span><span id="lab_forEDate2"></span></td>
+								<td class="hool"><span id="lab_forName2"></span></td>
+								<td class="bora"><span id="lab_forContent2"></span></td>
+							</tr>
+							
+							<!-- 연수 3 -->
+							
+							<tr  id="tr_forState3"  style="display:none;">
+								<td class="hool"><span id="lab_forState3">무무무무</span></td>
+								<td class="hool"><span id="lab_forSDate3">3333-01-01</span><span id="lab_forEDate3"> ~ 4444-01-02</span></td>
+								<td class="hool"><span id="lab_forName3">444</span></td>
+								<td class="bora"><span id="lab_forContent3">444</span></td>
+							</tr>
+							
+							<!-- 연수 4 -->
+							
+							<tr id="tr_forState4"  style="display:none;">
+								<td class="hool"><span id="lab_forState4">무무무무</span></td>
+								<td class="hool"><span id="lab_forSDate4">3333-01-01</span><span id="lab_forEDate4"> ~ 4444-02-02</span></td>
+								<td class="hool"><span id="lab_forName4">444</span></td>
+								<td class="bora"><span id="lab_forContent4">444</span></td>
+							</tr>
+							
+						</tbody>
+					</table>
+				</div>
+				<!-- // 7.해외연수활동 ########################################-->
+				
+				<!-- 6.수상경력 -->
+				<div id="prize" style="margin-top:50px">
+					<div class="title">수상경력</div>
+					<table width="100%" class="tbViewType2" summary="4.외국어사항">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="*" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>수상단체</strong></div></th>
+								<th><div class="hool"><strong>수상일자</strong></div></th>
+								<th><div class="hool"><strong>수상내용</strong></div></th>
+							</tr>
+							<tr><!-- 수상 1 -->
+								<td class="hool"><span id="lab_medalName1"></span></td>
+								<td class="hool"><span id="lab_medalDate1"></span></td>
+								<td class="bora"><span id="lab_medalContent1"></span></td>
+							</tr>
+							<tr><!-- 수상 2 -->
+								<td class="hool"><span id="lab_medalName2"></span></td>
+								<td class="hool"><span id="lab_medalDate2"></span></td>
+								<td class="bora"><span id="lab_medalContent2"></span></td>
+							</tr>
+							<tr><!-- 수상 3 -->
+								<td class="hool"><span id="lab_medalName3"></span></td>
+								<td class="hool"><span id="lab_medalDate3"></span></td>
+								<td class="bora"><span id="lab_medalContent3"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div><!-- // 6.수상경력 ########################################-->
+				
+				<!-- 9.자격 및 면허 ########################################-->
+				<div id="license">
+					<div class="title">자격 및 면허</div>
+					<table width="100%" class="tbViewType2" summary="9.자격 및 면허">
+						<colgroup>
+							<col width="20%" >
+							<col width="30%" >
+							<col width="25%" >
+							<col width="25%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>종류</strong></div></th>
+								<th><div class="hool"><strong>자격번호</strong></div></th>
+								<th><div class="hool"><strong>취득일자</strong></div></th>
+								<th class="thbora"><strong>발행처</strong></th>
+							</tr>
+							<tr id="tr_licName1">
+								<!-- 면허 1(운전면허)---------------------->
+								<td class="hool"><span id="lab_licName1"></span></td>
+								<td class="hool"><span id="lab_licNum1"></span></td>
+								<td class="hool"><span id="lab_licGetDate1"></span></td>
+								<td class="bora"><span id="lab_licPub1"></span></td>
+								<!-- 면허 2 ---------------------->
+							</tr>
+							<tr id="tr_licName2">
+								<td class="hool"><span id="lab_licName2"></span></td>
+								<td class="hool"><span id="lab_licNum2"></span></td>
+								<td class="hool"><span id="lab_licGetDate2"></span></td>
+								<td class="bora"><span id="lab_licPub2"></span></td>
+							</tr>
+							<tr id="tr_licName3">
+								<!-- 면허 3 ---------------------->
+								<td class="hool"><span id="lab_licName3"></span></td>
+								<td class="hool"><span id="lab_licNum3"></span></td>
+								<td class="hool"><span id="lab_licGetDate3"></span></td>
+								<td class="bora"><span id="lab_licPub3"></span></td>
+							</tr>
+							<tr id="tr_licName4" >
+								<!-- 면허 4 ---------------------->
+								<td class="hool"><span id="lab_licName4"></span></td>
+								<td class="hool"><span id="lab_licNum4"></span></td>
+								<td class="hool"><span id="lab_licGetDate4"></span></td>
+								<td class="bora"><span id="lab_licPub4"></span></td>
+							</tr>
+							<tr id="tr_licName5" >
+								<!-- 면허 5 ---------------------->
+								<td class="hool"><span id="lab_licName5"></span></td>
+								<td class="hool"><span id="lab_licNum5"></span></td>
+								<td class="hool"><span id="lab_licGetDate5"></span></td>
+								<td class="bora"><span id="lab_licPub5"></span></td>
+							</tr>
+							<tr id="tr_licName6" >
+								<!-- 면허 6 ---------------------->
+								<td class="hool"><span id="lab_licName6"></span></td>
+								<td class="hool"><span id="lab_licNum6"></span></td>
+								<td class="hool"><span id="lab_licGetDate6"></span></td>
+								<td class="bora"><span id="lab_licPub6"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 9.자격 및 면허 ########################################-->
+
+				<!-- 14.자기소개서 ########################################-->
+				<div id="Div1" clear="all" style="PAGE-BREAK-BEFORE:always">
+					<div class="title">자기소개서</div>
+					<table width="100%" class="tbViewType2" summary="14.자기소개서">
+						<tbody>
+							<tr>
+								<th class="thbora2"><strong>1. 성장과정을 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce1">5555555555555555555555555555555555555555555555555555555</span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>2. 성격의 장,단점을 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="para"><strong></strong></div>
+									<div class="Print_title_introduce1"><span id="lab_introduce2">유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년</span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>3. 차별화되는 본인만의 핵심역량은 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce3">유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년</span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>4. 도전했던 경험과 이를 통해 얻은 성취는 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce4">유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년</span></div>
+								</td>
+							</tr>
+							<tr>
+								<th class="thbora2"><strong>5. 협업,팀워크를 통해 달성한 성과를 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce5">유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년</span></div>
+								</td>
+							</tr>
+						
+							<tr>
+								<th class="thbora2"><strong>6. 지원동기 및 입사 후 포부는 무엇인지 서술하여 주시기 바랍니다.</strong></th>
+							</tr>
+						
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_introduce6">유 역사의 0지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여 년장을 연 정식품은 지난 40여 년유 역사의 첫 장을 연 정식품은 지난 40여</span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 14.자기소개서 ########################################-->
+
+                <!-- 15.업무상 강점 ########################################
+				<div id="strength">
+					<div class="title">업무상 강점</div>
+					<table width="100%" class="tbViewType2" summary="15.업무상 강점">
+						<colgroup>
+							<col width="30%" >
+							<col width="70%" >
+						</colgroup>
+						<tbody>
+							<tr>
+								<th><div class="hool"><strong>구분</strong></div></th>
+								<th class="thbora"><strong>관련내용</strong></th>
+							</tr>
+							<tr id="tr1" >
+								<td class="hool"><span id="lab_strength1"></span></td>
+								<td class="bora"><span id="lab_strengthName1"></span></td>
+							</tr>
+							<tr id="tr2" >
+								<td class="hool"><span id="lab_strength2"></span></td>
+								<td class="bora"><span id="lab_strengthName2"></span></td>
+							</tr>
+							<tr id="tr3" >
+								<td class="hool"><span id="lab_strength3"></span></td>
+								<td class="bora"><span id="lab_strengthName3"></span></td>
+							</tr>
+							<tr id="tr4" >
+								<td class="hool"><span id="lab_strength4"></span></td>
+								<td class="bora"><span id="lab_strengthName4"></span></td>
+							</tr>
+							<tr id="tr5" >
+								<td class="hool"><span id="lab_strength5"></span></td>
+								<td class="bora"><span id="lab_strengthName5"></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 15.업무상 강점 ########################################-->
+                
+                <!-- 16.주요 경력 ########################################
+				<div id="workhitory" clear="all" style="PAGE-BREAK-BEFORE:always">
+					<div class="title">주요 경력</div>
+					<table width="100%" class="tbViewType2" summary="16.주요 경력">
+						<tbody>
+							<tr>
+								<th class="thbora2"><strong>상세 주요 경력</strong></th>
+							</tr>
+							<tr>
+								<td class="bora4">
+									<div class="Print_title_introduce1"><span id="lab_history1"></span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<!-- // 16.주요경력 ########################################-->
+				
+			</div><!-- wrap750 // -->
+    <!-- END: Content-->
+    </th:block>
+    
+</html>

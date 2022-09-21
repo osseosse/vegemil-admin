@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>웹진 신청 리스트</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css}">
+		
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-flat-pickr.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+
+
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jszip.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/pdfmake.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/vfs_fonts.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.html5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.print.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js}"></script>
+		<script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/components/components-dropdowns.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/components/components-modals.js}"></script>
+	    
+	    <script th:src="@{/js/admin/cs/subscribeList.js}"></script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-body">
+                <!-- Basic table -->
+                <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <table class="datatables-basic table">
+                                    <thead>
+                                        <tr>
+                                        	<th>번호</th>
+                                        	<th>신청일자</th>
+											<th>이 름</th>
+											<th>전화번호</th>
+											<th>주 소</th>
+                                            <th>메 모</th>   
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--/ Basic table -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>가정배달 주문</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css}">
+		
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-flat-pickr.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+
+
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jszip.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/pdfmake.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/vfs_fonts.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.html5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.print.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js}"></script>
+		<script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/components/components-dropdowns.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/components/components-modals.js}"></script>
+	    
+	    <script th:src="@{/js/admin/cs/orderList.js}"></script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-body">
+            	<div class="form-modal-ex">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                        	제품등록 관리
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade text-start" id="inlineForm" tabindex="-1" aria-labelledby="myModalLabel33" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">추가하기</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form th:object="${CsDTO}" th:action="@{/admin/cs/cpNewsRegist}" method="post" enctype="multipart/form-data" >
+                                    <div class="modal-body">
+                                    	<label>제목 : </label>
+                                        <div class="mb-1">
+                                            <input type="text" placeholder="제목" class="form-control" name="pSubject" id="pSubject"/>
+                                        </div>
+                                        <label>등록일자 : </label>
+                                        <div class="mb-1">
+                                            <input type="text" placeholder="ex)2021-10-14" class="form-control" name="pWritedate" id="pWritedate"/>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 mb-1 mb-sm-0">
+                                            <label for="formFile" class="form-label">파일 첨부</label>
+                                            <input class="form-control" type="file" id="fileName" name="fileName"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    	<input type="submit" class="btn btn-primary" value="추가"></input>
+                                        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">추가</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bs-stepper checkout-tab-steps">
+                	<!-- Wizard starts -->
+	                <div class="bs-stepper-header">
+	                    <div class="step" data-target="#step-cart" role="tab" id="step-cart-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="list" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">가정배달 주문 리스트</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                    <div class="line">
+	                        
+	                    </div>
+	                    <div class="step" data-target="#step-address" role="tab" id="step-address-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="file-plus" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">제품 등록 관리</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- Wizard ends -->
+	                <div class="bs-stepper-content">
+	                	<!-- Checkout Place order starts -->
+	                    <div id="step-cart" class="content" role="tabpanel" aria-labelledby="step-cart-trigger">
+			                <!-- Basic table -->
+			                <section id="basic-datatable">
+			                    <div class="row">
+			                        <div class="col-12">
+			                            <div class="card">
+			                                <table class="datatables-basic table" id="orderListTable">
+			                                    <thead>
+			                                        <tr>
+			                                        	<th>번호</th>
+			                                        	<th>주문일자</th>
+														<th>주문자</th>
+														<th>전화번호</th>
+														<th>주소</th>
+			                                            <th>상품명</th>   
+			                                            <th>용량</th>
+			                                            <th>수량</th>
+			                                            <th>배달희망일</th>
+			                                            <th>접수여부</th>
+			                                            <th></th>
+			                                        </tr>
+			                                    </thead>
+			                                </table>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </section>
+			                <!--/ Basic table -->
+		                </div>
+		                <div id="step-address" class="content" role="tabpanel" aria-labelledby="step-address-trigger">
+		                	<!-- Basic table -->
+			                <section id="basic-datatable">
+			                    <div class="row">
+			                        <div class="col-12">
+			                            <div class="card">
+			                                <table class="datatables-basic table" id="productTable">
+			                                    <thead>
+			                                        <tr>
+			                                        	<th>제품명</th>
+			                                        	<th>용량</th>
+														<th>이미지 파일명</th>
+														<th>제품 상세페이지</th>
+														<th></th>
+			                                        </tr>
+			                                    </thead>
+			                                </table>
+			                            </div>
+			                        </div>
+			                    </div>
+			                </section>
+			                <!--/ Basic table -->
+		                </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

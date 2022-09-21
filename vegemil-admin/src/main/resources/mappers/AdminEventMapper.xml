@@ -100,4 +100,51 @@
 		<include refid="CommonMapper.search" /> -->
 	</select>
 	<!-- 아기달력모델 -->
+	
+	<sql id="webzineEventColumns">
+		  index_no
+		, cust_name
+		, apply_date
+		, hp
+		, remark
+		, cust_email
+		, answer
+	</sql>
+	
+	<select id="selectWebzineEventList" parameterType="com.vegemil.domain.WebzineDTO" resultType="com.vegemil.domain.WebzineDTO">
+		SELECT
+			<include refid="webzineEventColumns" />
+		FROM
+			M_WebzineEvent
+		<!-- WHERE
+			( c_writeDate > LAST_DAY(NOW() - interval 1 month) AND c_writeDate <= LAST_DAY(NOW()) )
+		<include refid="CommonMapper.search" /> -->
+		ORDER BY
+			index_no DESC
+			
+		<!-- <include refid="CommonMapper.paging" />  -->
+	</select>
+
+	<select id="selectWebzineEventTotalCount" parameterType="com.vegemil.domain.WebzineDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_WebzineEvent
+		<!-- WHERE
+		<include refid="CommonMapper.search" /> -->
+	</select>
+	
+	<select id="selectTemperature" parameterType="int" resultType="int">
+		SELECT
+			temperature
+		FROM
+			m_thermometer
+	</select>
+	
+	<update id="updateTemperature" parameterType="int">
+		UPDATE
+			m_thermometer
+		SET
+			temperature = #{temperature}
+	</update>
 </mapper>

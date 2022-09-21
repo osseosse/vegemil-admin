@@ -3,7 +3,6 @@
 
 <mapper namespace="com.vegemil.mapper.AdminRecruitMapper">
 
-	<!-- cp뉴스리스트 -->
 	<sql id="setupColumns">
 		  s_th
 		, s_title
@@ -27,22 +26,31 @@
 			<include refid="setupColumns" />
 		FROM
 			R_Setup
-		WHERE
-			s_close = '1'
 		ORDER BY
 			s_th DESC
+	</select>
+	
+	<select id="selectRecruitData" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			<include refid="setupColumns" />
+		FROM
+			R_Setup
+		WHERE
+			s_th = #{sTh}
 	</select>
 	
 	<select id="selectVolunteerData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT
 			 COUNT(*) AS totalCount
-			,COUNT(CASE WHEN memSex='남' THEN 1 END) AS maleCount
-			,COUNT(CASE WHEN memSex='여' THEN 1 END) AS femaleCount
-			,COUNT(CASE WHEN joinCareer='신입' THEN 1 END) AS juniorCount
-			,COUNT(CASE WHEN joinCareer='경력' THEN 1 END) AS seniorCount
-			,COUNT(CASE WHEN joinCompany1='정식품' THEN 1 END) AS chungCount
-			,COUNT(CASE WHEN joinCompany1='자연과사람들' THEN 1 END) AS nnpCount
-			,COUNT(CASE WHEN joinCompany1='오쎄' THEN 1 END) AS osseCount
+			,COUNT(CASE WHEN sex='남' THEN 1 END) AS maleCount
+			,COUNT(CASE WHEN sex='여' THEN 1 END) AS femaleCount
+			<!--,COUNT(CASE WHEN join_career='신입' THEN 1 END) AS juniorCount
+			,COUNT(CASE WHEN join_career='경력' THEN 1 END) AS seniorCount -->
+			,0 AS juniorCount
+			,0 AS seniorCount
+			,COUNT(CASE WHEN join_company='정식품' THEN 1 END) AS chungCount
+			,COUNT(CASE WHEN join_company='자연과사람들' THEN 1 END) AS nnpCount
+			,COUNT(CASE WHEN join_company='오쎄' THEN 1 END) AS osseCount
 		FROM
 			R_Recruit
 		WHERE
@@ -51,31 +59,123 @@
 	
 	<select id="selectDateApplyData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT
-			 joinDate
+			 join_date
 			,count(*) AS dateCount
 		FROM
 			R_Recruit
 		WHERE
 			setup_th = #{sTh}
 		GROUP BY
-			joinDate
+			join_date
 		ORDER BY
-			joinDate
+			join_date
 	</select>
 	
 	<select id="selectFieldData" parameterType="string" resultType="com.vegemil.domain.RecruitDTO">
 		SELECT
-			 joinField1
-			,joinCompany1
-			,joinCareer
+			 join_field1
+			,join_company
+			<!-- ,join_career -->
+			,'0' as join_career
 			,count(*) AS fieldCount
 		FROM
 			R_Recruit
 		WHERE
 			setup_th = #{sTh}
 		GROUP BY
-			joinField1
+			join_field1
 		ORDER BY
-			joinCompany1 DESC
+			join_company DESC
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		INSERT INTO R_Setup (
+			<include refid="setupColumns" />
+		) VALUES (
+			  #{sTh}
+			, #{sTitle}
+			, #{sCompany}
+			, #{sType}
+			, #{sStartdate}
+			, #{sEnddate}
+			, #{s1}
+			, #{s2}
+			, #{s3}
+			, '1'
+			, NOW()
+			, #{sModifydate}
+			, #{sCategory}
+			, #{sCategory2}
+			, #{sCollect}
+		)
+	</insert>
+	
+	<update id="updateNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		UPDATE R_Setup
+		SET
+			  s_title		= #{sTitle}
+			, s_company		= #{sCompany}
+			, s_type		= #{sType}
+			, s_startdate	= #{sStartdate}
+			, s_enddate		= #{sEnddate}
+			, s_1			= #{s1}
+			, s_2			= #{s2}
+			, s_3			= #{s3}
+			, s_close		= #{sClose}
+			, s_insertdate	= #{sInsertdate}
+			, s_modifydate	= NOW()
+			, s_category	= #{sCategory}
+			, s_category2	= #{sCategory2}
+			, s_collect		= #{sCollect}
+		WHERE
+			s_th = #{sTh}
+	</update>
+	
+	<insert id="copyNotice" parameterType="com.vegemil.domain.RecruitDTO">
+		INSERT INTO R_Setup (
+			<include refid="setupColumns" />
+		) SELECT 
+			  #{newSTh}
+			, s_title
+			, s_company
+			, s_type
+			, s_startdate
+			, s_enddate
+			, s_1
+			, s_2
+			, s_3
+			, s_close
+			, NOW()
+			, null
+			, s_category
+			, s_category2
+			, s_collect
+		FROM R_Setup
+		WHERE s_th = #{sTh}
+	</insert>
+	
+	<select id="selectVolunteerList" resultType="com.vegemil.domain.RecruitDTO">
+		SELECT
+			  a.idx
+			, a.setup_th
+			, a.mem_no
+			, b.mem_name
+			, a.join_ok
+			, b.birthday
+			, a.sex
+			, a.join_company
+			, a.join_field1
+			, a.join_area1
+			, a.sch_name4
+			, a.sch_major4
+			, a.join_date
+		FROM
+			R_Recruit a, m_recruit_member b
+		WHERE
+			a.mem_no = b.mem_no
+		  AND
+			a.setup_th = #{sTh}
+		ORDER BY
+			a.join_date DESC
 	</select>
 </mapper>

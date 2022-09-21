@@ -125,7 +125,7 @@ $(function () {
         { data: 'cRoute' },
         { data: 'cAlived' },
         { data: '' },
-        { data: 'cRank' },
+        { data: 'cRank' }
       ],
       columnDefs: [
       	{
@@ -258,7 +258,7 @@ $(function () {
 					'</div>' 
       			);
       		}
-      	},
+      	}
       ],
       order: [[0, 'desc']],
       dom:

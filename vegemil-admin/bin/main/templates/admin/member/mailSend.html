@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>메일 보내기</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/extensions/ext-component-toastr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-quill-editor.css}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/extensions/toastr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    
+	    <script>
+		    function submitMailsend(){
+				$('#mbsContent').attr("value",fullEditor.root.innerHTML);
+		    }
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ecommerce-application">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+        	<div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">메일 보내기</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                    <div class="mb-1 breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+    			<!-- full Editor start -->
+                <section class="full-editor">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                	<form th:object="${MailDTO}" th:action="@{/admin/member/mailSend}" method="post" enctype="multipart/form-data" onsubmit="return submitMailsend()">
+	                                	<div class="col-xl-4 col-md-6 col-12">
+	                                		<label for="address" class="form-label">받는사람 메일</label>
+	                                		<input type="text" class="form-control" name="address" id="address" value=""/><br>
+                                        </div>
+
+	                                	<label for="title" class="form-label">제목</label>
+	                                	<input type="text" class="form-control" name="title" id="title" value=""/><br>
+	                                	
+										<textarea class="form-control" id="message" rows="8" placeholder="내용을 입력하세요."></textarea>
+
+	                                    <div class="mb-1">
+						                    <label class="form-label" for="mbsCategory">카테고리</label>
+						                    <select class="form-select" id="mbsCategory" name="mbsCategory">
+						                        <option value="성장">성장/건강</option>
+						                        <option value="임신">임신/출산</option>
+						                        <option value="놀이">놀이/교육</option>
+						                        <option value="리빙">리빙/헬스</option>
+						                    </select>
+						                </div><br>
+										육아정보 진열 여부&nbsp;&nbsp;
+						                <div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="mbsActive" id="mbsActive" value="1" checked />
+											<label class="form-check-label" for="babyActive">활성</label>
+										</div>
+										<div class="form-check form-check-inline">
+										    <input class="form-check-input" type="radio" name="mbsActive" id="mbsActive2" value="0" />
+										    <label class="form-check-label" for="babyActive2">비활성</label>
+										</div><br><br>
+										메인화면 진열 여부&nbsp;&nbsp;
+										<div class="form-check form-check-inline">
+										    <input class="form-check-input" type="radio" name="mbsCheck" id="mbsCheck" value="1" checked />
+										    <label class="form-check-label" for="mainActive">활성</label>
+										</div>
+										<div class="form-check form-check-inline">
+										    <input class="form-check-input" type="radio" name="mbsCheck" id="mbsCheck2" value="0" />
+										    <label class="form-check-label" for="mainActive2">비활성</label>
+										</div><br><br>
+										<input type="submit" class="btn btn-outline-primary" value="  메일 보내기   "></input>
+							        </form>
+								</div> 
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- full Editor end -->
+		    </div>
+		</div>            
+	</div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminLabMapper">
+
+	<!-- 불공정거래 신고 -->
+	<sql id="faqColumns">
+		    f_idx
+		  , f_cate
+		  , f_question
+		  , f_answer
+		  , f_view
+		  , f_hit
+		  , f_editdate
+		  , f_gory
+		  , f_img
+	</sql>
+	
+	<select id="selectFaqList" parameterType="com.vegemil.domain.LabDTO" resultType="com.vegemil.domain.LabDTO">
+		SELECT
+			<include refid="faqColumns" />
+		FROM
+			M_Faq
+		ORDER BY
+			f_idx DESC
+	</select>
+	
+	<select id="selectFaqDetail" parameterType="long" resultType="com.vegemil.domain.LabDTO">
+		SELECT
+			<include refid="faqColumns" />
+		FROM
+			M_Faq
+		WHERE
+			f_idx = #{idx}
+	</select>
+	<!-- 
+	<update id="deleteUnfairClaim" parameterType="long">
+		DELETE FROM M_Claim
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	
+	<update id="updateUnfairClaim" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_Claim
+		SET
+			  c_check = #{cCheck}
+			, c_answer = #{cAnswer}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	
+	<update id="updateCheckUnfairClaim" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_Claim
+		SET
+			  c_check = #{cCheck}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	 -->
+	<!-- 불공정거래 신고 -->
+	
+</mapper>

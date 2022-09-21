@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>TV CF 관리</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/extensions/ext-component-toastr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/extensions/toastr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.twbsPagination.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/forms/form-select2.js}"></script>
+	    <script th:src="@{/app-assets/js/scripts/components/components-dropdowns.js}"></script>
+	    
+	    <script th:src="@{/js/admin/baby/components-pagination.js}"></script>
+	    <script th:src="@{/js/admin/baby/babyInfoList.js}"></script>
+	    <script>
+		    $('.firstLast1-links').twbsPagination({
+		        totalPages: [[ ${params.PaginationInfo.totalPageCount} ]],
+		        visiblePages: 5,
+		        prev: 'Prev',
+		        first: 'First',
+		        last: 'Last',
+		        startPage: [[ ${params.currentPageNo} ]],
+		        initiateStartPageClick: false,
+		        onPageClick: function (event, page) {
+		        	$('.pagination').find('li').addClass('page-item');
+		        	$('.pagination').find('a').addClass('page-link');
+	
+		          	window.location.href = '[[ ${#request.requestURI} ]]?currentPageNo=' + page;
+		        }
+		     });
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ecommerce-application">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+        	<div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">TV CF 관리</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                    <div class="mb-1 breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+            	<div class="bs-stepper checkout-tab-steps">
+	            	<!-- Wizard starts -->
+	                <div class="bs-stepper-header">
+	                    <div class="step" data-target="#step-cart" role="tab" id="step-cart-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="list" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">TV CF 리스트</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                    <div class="line">
+	                        
+	                    </div>
+	                    <div class="step" data-target="#step-address" role="tab" id="step-address-trigger">
+	                        <button type="button" class="step-trigger">
+	                            <span class="bs-stepper-box">
+	                                <i data-feather="file-plus" class="font-medium-3"></i>
+	                            </span>
+	                            <span class="bs-stepper-label">
+	                                <span class="bs-stepper-title">TV CF 추가</span>
+	                            </span>
+	                        </button>
+	                    </div>
+	                </div>
+	                <!-- Wizard ends -->
+	            	<div class="bs-stepper-content">
+	                        <!-- Checkout Place order starts -->
+	                        <div id="step-cart" class="content" role="tabpanel" aria-labelledby="step-cart-trigger">
+	                            <div id="place-order" class="list-view product-checkout">
+	                                <!-- Checkout Place Order Left starts -->
+	                                <div class="checkout-items">
+	                                	<th:block th:if="${tvCfList !=null}" th:each="tvCfList : ${tvCfList}">
+											<div class="card ecommerce-card">
+											
+												<div class="item-img">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<div th:text="${tvCfList.tIdx}"></div>&nbsp;&nbsp;&nbsp;
+													<a th:href="|/admin/baby/babyInfoDetail?mbsIdx=${tvCfList.tIdx}|">
+														<img th:src="@{|/upload/tvCf/${tvCfList.tYoutubeImg}|}" alt="img-placeholder" />
+													</a>
+												</div>
+												<div class="card-body">
+													
+													<div class="item-name">
+														<h6 class="mb-0"><a th:href="|/admin/baby/babyInfoDetail?mbsIdx=${tvCfList.tIdx}|" class="text-body">[[${tvCfList.tSubject}]]</a></h6>
+													</div>
+													<br>
+													<div class="item-quantity">
+														<span class="quantity-title"><b>날짜</b><br>[[${tvCfList.tDate}]]</span>
+													</div>
+													<div class="item-quantity">
+														<span class="quantity-title"><b>유튜브 URL</b><br>[[${tvCfList.tYoutube}]]</span>
+													</div>
+												</div>
+												<div class="item-options text-center">
+													<div class="item-wrapper">
+														<div class="item-cost">
+
+															<p class="card-text shipping">							
+																
+															</p>
+														</div>
+													</div>
+													<div class="d-flex flex-column">
+			                                            <label class="form-check-label mb-50" for="customSwitch3">TV CF 진열 여부</label>
+			                                            <div class="form-check form-check-primary form-switch">
+			                                                <input type="checkbox" th:id="'tOnair'+${tvCfList.tIdx}" th:checked="${tvCfList.tOnair.toString() == '1'}" class="form-check-input"/>
+			                                            </div>
+			                                        </div>
+			                                        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    												<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+			                                        <script th:inline="javascript">
+														$(function(){
+														    $('#tOnair[[${tvCfList.tIdx}]]').change(function(){
+														    	
+														    	if($('#tOnair[[${tvCfList.tIdx}]]').is(":checked")){
+														    		$.ajax({
+														    			url: "/admin/public/tvCfOnair?tIdx=[[${tvCfList.tIdx}]]&tOnair=1",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("TV CF 진열에 실패하였습니다.");
+														    					$("input:checkbox[id='tOnair[[${tvCfList.tIdx}]]']").attr("checked", false);
+														    					return false;
+														    				}
+														    				alert("TV CF 진열에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='tOnair[[${tvCfList.tIdx}]]']").attr("checked", true);
+														    				return false;
+														    			}
+														    		});
+														            
+														        }else{
+														        	$.ajax({
+														    			url: "/admin/public/tvCfOnair?tIdx=[[${tvCfList.tIdx}]]&tOnair=0",
+														    			type: "GET",
+														    			success: function(response) {
+														    				if (response.result == false) {
+														    					alert("TV CF 진열 해제에 실패하였습니다.");
+														    					$("input:checkbox[id='tOnair[[${tvCfList.tIdx}]]']").attr("checked", true);
+														    					return false;
+														    				}
+														    				alert("TV CF 진열 해제에 성공하였습니다.");
+														    			},
+														    			error: function(xhr, status, error) {
+														    				alert("에러가 발생하였습니다.");
+														    				$("input:checkbox[id='tOnair[[${tvCfList.tIdx}]]']").attr("checked", false);
+														    				return false;
+														    			}
+														    		});
+														        } 
+														    });
+														});
+													</script>
+												</div>
+											</div>
+										</th:block>
+	                                </div>
+	                                <!-- Checkout Place Order Left ends -->
+
+	                                <!-- Checkout Place Order Right starts -->
+	                                <div class="checkout-options">
+	                                    
+	                                  
+	                                </div>
+	                                <!-- Checkout Place Order Right ends -->
+	                                <!-- E-commerce Pagination Starts -->
+				                    <section id="ecommerce-pagination">
+				                        <!-- Dynamic Pagination with last & first starts -->
+                        
+		                                <div class="card-body">
+		                                    <ul class="pagination firstLast1-links"></ul>
+		                                </div>
+		                            
+		                        		<!-- Dynamic Pagination with last & first ends -->
+				                    </section>
+				                    
+				                    <!-- E-commerce Pagination Ends -->
+	                            </div>
+	                            <!-- Checkout Place order Ends -->
+	                        </div>
+	                        <!-- Checkout Customer Address Starts -->
+	                        <div id="step-address" class="content" role="tabpanel" aria-labelledby="step-address-trigger">
+	                            <br>
+	                                <!-- Checkout Customer Address Left starts -->
+	                                <div class="card">
+	                                    
+	                                    <!-- full Editor start -->
+						                <section class="full-editor">
+						                    <div class="row">
+						                        <div class="col-12">
+						                            <div class="card">
+						                            
+							                            <form th:object="${PublicDTO}" th:action="@{/admin/public/tvCfRegist}" method="post" enctype="multipart/form-data" onsubmit="return registerBabyInfo()">
+							                                <div class="card-body">
+							                                	<label for="tSubject" class="form-label">타이틀</label>
+							                                    <input type="text" class="form-control" name="tSubject" id="tSubject" value=""/><br><br>
+							                                    <label for="tYoutube" class="form-label">유튜브 URI</label>
+							                                    <input type="text" class="form-control" name="tYoutube" id="tYoutube" value=""/><br><br>
+							                                    <label for="tDate" class="form-label">날짜</label>
+							                                    <input type="text" class="form-control" name="tDate" id="tDate" value=""/><br><br>
+							                                    <div class="row">				                                        
+							                                        <div class="col-lg-6 col-md-12 mb-1 mb-sm-0">
+							                                            <label for="formFile" class="form-label">썸네일 사진 첨부</label>
+							                                            <input class="form-control" type="file" accept=".jpg,.jpeg,.png" id="fileName" name="fileName"/>
+							                                        </div>
+							                                    </div><br><br>
+																TV CF 노출 여부&nbsp;&nbsp;
+							                                    <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="tOnair" id="tOnair" value="1" checked />
+						                                            <label class="form-check-label" for="tOnair">노출</label>
+						                                        </div>
+						                                        <div class="form-check form-check-inline">
+						                                            <input class="form-check-input" type="radio" name="tOnair" id="tOnair2" value="0" />
+						                                            <label class="form-check-label" for="tOnair2">미노출</label>
+						                                        </div><br><br>
+							                                </div>
+							                                <input type="submit" class="btn btn-outline-primary" value="  등록   "></input>
+							                            </form>
+						                                
+						                            </div>
+						                        </div>
+						                    </div>
+						                </section>
+						                <!-- full Editor end -->
+	                                    
+	                                </div>
+	                                <!-- Checkout Customer Address Left ends -->	                            
+	                        </div>
+	                        <!-- Checkout Customer Address Ends -->
+	                      
+	                       
+	                    </div>
+	                </div>
+            	</div>
+            </div>
+        </div>
+    
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

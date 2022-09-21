@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>보도자료 관리</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-ecommerce.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-wizard.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/extensions/ext-component-toastr.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-number-input.css}">
+
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/forms/wizard/bs-stepper.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/extensions/toastr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.bootpag.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/pagination/jquery.twbsPagination.min.js}"></script>
+	    
+	    <script th:src="@{/js/admin/baby/components-pagination.js}"></script>
+	    <script th:src="@{/js/admin/baby/babyInfoList.js}"></script>
+	    <script>
+	    	$('input[name=mSubject]').attr('value','[[ ${news.mSubject} ]]');
+	    	$('input[name=mDate]').attr('value','[[ ${news.mDate} ]]');
+	    	$('input:radio[name=mDisplay]:input[value="[[ ${news.mDisplay} ]]"]').attr('checked',true);
+	    	$('input[name=mAdname1]').attr('value','[[ ${news.mAdname1} ]]');
+	    	$('input[name=mAduri1]').attr('value','[[ ${news.mAduri1} ]]');
+	    	$('input[name=mAdname2]').attr('value','[[ ${news.mAdname2} ]]');
+	    	$('input[name=mAduri2]').attr('value','[[ ${news.mAduri2} ]]');
+	    	$('input[name=mAdname3]').attr('value','[[ ${news.mAdname3} ]]');
+	    	$('input[name=mAduri3]').attr('value','[[ ${news.mAduri3} ]]');
+	    	$('input[name=mAdname4]').attr('value','[[ ${news.mAdname4} ]]');
+	    	$('input[name=mAduri4]').attr('value','[[ ${news.mAduri4} ]]');
+	    	$('input[name=mAdname5]').attr('value','[[ ${news.mAdname5} ]]');
+	    	$('input[name=mAduri5]').attr('value','[[ ${news.mAduri5} ]]');
+	    	$('input[name=mAdname6]').attr('value','[[ ${news.mAdname6} ]]');
+	    	$('input[name=mAduri6]').attr('value','[[ ${news.mAduri6} ]]');
+	    	$('input[name=mAdname7]').attr('value','[[ ${news.mAdname7} ]]');
+	    	$('input[name=mAduri7]').attr('value','[[ ${news.mAduri7} ]]');
+	    	$('input[name=mAdname8]').attr('value','[[ ${news.mAdname8} ]]');
+	    	$('input[name=mAduri8]').attr('value','[[ ${news.mAduri8} ]]');
+	    	$('input[name=mAdname9]').attr('value','[[ ${news.mAdname9} ]]');
+	    	$('input[name=mAduri9]').attr('value','[[ ${news.mAduri9} ]]');
+	    	$('input[name=mAdname10]').attr('value','[[ ${news.mAdname10} ]]');
+	    	$('input[name=mAduri10]').attr('value','[[ ${news.mAduri10} ]]');
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ecommerce-application">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+        	<div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">보도자료 관리</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
+                    <div class="mb-1 breadcrumb-right">
+                        <div class="dropdown">
+                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i data-feather="grid"></i></button>
+                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i class="me-1" data-feather="check-square"></i><span class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i class="me-1" data-feather="message-square"></i><span class="align-middle">Chat</span></a><a class="dropdown-item" href="app-email.html"><i class="me-1" data-feather="mail"></i><span class="align-middle">Email</span></a><a class="dropdown-item" href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span class="align-middle">Calendar</span></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-body">
+    			<!-- full Editor start -->
+                <section class="full-editor">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                	<form th:object="${PublicDTO}" th:action="@{/admin/public/newsListUpdate}" method="post" enctype="multipart/form-data">
+	                                	<input type="submit" class="btn btn-outline-primary" value="  등록   "></input><br><br>
+	                                	<label for="mbsTitle" class="form-label">타이틀</label>
+	                                	<input type="text" class="form-control" name="mSubject" id="mSubject" value=""/><br><br>
+	                                	<input type="hidden" class="form-control" name="mIdx" id="mIdx" value=""/>
+	                                    <label for="mDate" class="form-label">날짜</label>
+	                                	<input type="text" class="form-control" name="mDate" id="mDate" value=""/><br><br>
+	                                	보도자료 진열 여부&nbsp;&nbsp;
+						                <div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" name="mDisplay" id="mDisplay" value="1" checked />
+											<label class="form-check-label" for="mDisplay">활성</label>
+										</div>
+										<div class="form-check form-check-inline">
+										    <input class="form-check-input" type="radio" name="mDisplay" id="mDisplay2" value="0" />
+										    <label class="form-check-label" for="mDisplay2">비활성</label>
+										</div><br><br>
+	                                	
+	                                	<label for="mAdname1" class="form-label">매체1</label>
+	                                	<input type="text" class="form-control" name="mAdname1" id="mAdname1" value=""/><br><br>
+	                                	<label for="mAduri1" class="form-label">매체 URI1</label>
+	                                	<input type="text" class="form-control" name="mAduri1" id="mAduri1" value=""/><br><br>
+	                                	<label for="mAdname2" class="form-label">매체2</label>
+	                                	<input type="text" class="form-control" name="mAdname2" id="mAdname2" value=""/><br><br>
+	                                	<label for="mAduri2" class="form-label">매체 URI2</label>
+	                                	<input type="text" class="form-control" name="mAduri2" id="mAduri2" value=""/><br><br>
+	                                	<label for="mAdname3" class="form-label">매체3</label>
+	                                	<input type="text" class="form-control" name="mAdname3" id="mAdname3" value=""/><br><br>
+	                                	<label for="mAduri3" class="form-label">매체 URI3</label>
+	                                	<input type="text" class="form-control" name="mAduri3" id="mAduri3" value=""/><br><br>
+	                                	<label for="mAdname4" class="form-label">매체4</label>
+	                                	<input type="text" class="form-control" name="mAdname4" id="mAdname4" value=""/><br><br>
+	                                	<label for="mAduri4" class="form-label">매체 URI4</label>
+	                                	<input type="text" class="form-control" name="mAduri4" id="mAduri4" value=""/><br><br>
+	                                	<label for="mAdname5" class="form-label">매체5</label>
+	                                	<input type="text" class="form-control" name="mAdname5" id="mAdname5" value=""/><br><br>
+	                                	<label for="mAduri5" class="form-label">매체 URI5</label>
+	                                	<input type="text" class="form-control" name="mAduri5" id="mAduri5" value=""/><br><br>
+	                                	<label for="mAdname6" class="form-label">매체6</label>
+	                                	<input type="text" class="form-control" name="mAdname6" id="mAdname6" value=""/><br><br>
+	                                	<label for="mAduri6" class="form-label">매체 URI6</label>
+	                                	<input type="text" class="form-control" name="mAduri6" id="mAduri6" value=""/><br><br>
+	                                	<label for="mAdname7" class="form-label">매체7</label>
+	                                	<input type="text" class="form-control" name="mAdname7" id="mAdname7" value=""/><br><br>
+	                                	<label for="mAduri7" class="form-label">매체 URI7</label>
+	                                	<input type="text" class="form-control" name="mAduri7" id="mAduri7" value=""/><br><br>
+	                                	<label for="mAdname8" class="form-label">매체8</label>
+	                                	<input type="text" class="form-control" name="mAdname8" id="mAdname8" value=""/><br><br>
+	                                	<label for="mAduri8" class="form-label">매체 URI8</label>
+	                                	<input type="text" class="form-control" name="mAduri8" id="mAduri8" value=""/><br><br>
+	                                	<label for="mAdname9" class="form-label">매체9</label>
+	                                	<input type="text" class="form-control" name="mAdname9" id="mAdname9" value=""/><br><br>
+	                                	<label for="mAduri9" class="form-label">매체 URI9</label>
+	                                	<input type="text" class="form-control" name="mAduri9" id="mAduri9" value=""/><br><br>
+	                                	<label for="mAdname1." class="form-label">매체10</label>
+	                                	<input type="text" class="form-control" name="mAdname10" id="mAdname10" value=""/><br><br>
+	                                	<label for="mAduri1." class="form-label">매체 URI10</label>
+	                                	<input type="text" class="form-control" name="mAduri10" id="mAduri10" value=""/><br><br>
+							        </form>
+								</div> 
+							</div>
+						</div>
+					</div>
+				</section>
+				<!-- full Editor end -->
+		    </div>
+		</div>            
+	</div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

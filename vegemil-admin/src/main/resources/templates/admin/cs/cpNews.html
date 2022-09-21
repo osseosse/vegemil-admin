@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>CP 뉴스브리핑</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/responsive.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/buttons.bootstrap5.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/tables/datatable/rowGroup.bootstrap4.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css}">
+		
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-flat-pickr.css}">
+
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.bootstrap5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.responsive.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/responsive.bootstrap4.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.checkboxes.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/datatables.buttons.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/jszip.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/pdfmake.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/vfs_fonts.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.html5.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/buttons.print.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/tables/datatable/dataTables.rowGroup.min.js}"></script>
+		<script th:src="@{/app-assets/js/scripts/components/components-modals.js}"></script>
+		
+	    <script th:src="@{/js/admin/cs/cpNews.js}"></script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-body">
+            	<div class="form-modal-ex">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#inlineForm">
+                        	추가하기
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade text-start" id="inlineForm" tabindex="-1" aria-labelledby="myModalLabel33" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="myModalLabel33">추가하기</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form th:object="${CsDTO}" th:action="@{/admin/cs/cpNewsRegist}" method="post" enctype="multipart/form-data" >
+                                    <div class="modal-body">
+                                    	<label>제목 : </label>
+                                        <div class="mb-1">
+                                            <input type="text" placeholder="제목" class="form-control" name="pSubject" id="pSubject"/>
+                                        </div>
+                                        <label>등록일자 : </label>
+                                        <div class="mb-1">
+                                            <input type="text" placeholder="ex)2021-10-14" class="form-control" name="pWritedate" id="pWritedate"/>
+                                        </div>
+                                        <div class="col-lg-6 col-md-12 mb-1 mb-sm-0">
+                                            <label for="formFile" class="form-label">파일 첨부</label>
+                                            <input class="form-control" type="file" id="fileName" name="fileName"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                    	<input type="submit" class="btn btn-primary" value="추가"></input>
+                                        <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">추가</button> -->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic table -->
+                <section id="basic-datatable">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <table class="datatables-basic table">
+                                    <thead>
+                                        <tr>
+                                        	<th>작성일자</th>
+                                        	<th>제목</th>
+											<th>파일명</th>
+                                            <th>다운로드</th>   
+                                            <th>삭제</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--/ Basic table -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

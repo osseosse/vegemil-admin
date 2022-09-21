@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>채용 공고 등록</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->		
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-pickadate.css}">
+	    <link rel="shortcut icon" type="image/x-icon" th:href="@{/app-assets/images/ico/favicon.ico}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/recruit2022.css}">
+		
+		<link rel="stylesheet" th:href="@{https://fonts.gstatic.com}">
+		<link rel="stylesheet" type="text/css" th:href="@{https://fonts.googleapis.com/css2?family=Inconsolata&amp;family=Roboto+Slab&amp;family=Slabo+27px&amp;family=Sofia&amp;family=Ubuntu+Mono&amp;display=swap}">
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    
+	    <script th:src="@{/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js}"></script>
+	    
+	    <script th:src="@{/app-assets/js/scripts/forms/pickers/form-pickers.js}"></script>
+
+	    <script th:src="@{/js/admin/recruit/card-analytics.js}"></script>
+	    <script th:src="@{/js/admin/recruit/jquery.repeater.js}"></script>
+
+	    <script th:inline="javascript">
+			var idx = 0;
+			var applyChangesBtn = $('.btn-apply-changes'),
+		    sourceItem = $('.source-item'),
+		    date = new Date(),
+		    btnAddNewItem = $('.btn-add-new ');
+			
+	    	/*<![CDATA[*/
+			$(document).ready(function() {
+				
+			});
+			/*]]>*/
+
+			// Repeater init
+			  if (sourceItem.length) {
+			    sourceItem.on('submit', function (e) {
+					e.preventDefault();
+			    });
+			    sourceItem.repeater({
+			      show: function () {
+					idx++;
+			        $(this).slideDown();
+			      },
+			      hide: function (e) {
+			        $(this).slideUp();
+			      }
+			    });
+			  }
+			  if (btnAddNewItem.length) {	//지원분야에 X버튼 생성
+				    btnAddNewItem.on('click', function () {
+				      if (feather) {
+				        // featherSVG();
+				        feather.replace({ width: 14, height: 14 });
+				      }
+				      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+				      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+				        return new bootstrap.Tooltip(tooltipTriggerEl);
+				      });
+				    });
+				  }
+			function changeCompany(e){
+				$('#noneCompany').attr('id','company'+idx);
+			}
+			
+			function changeField(e){
+				$('#noneField').attr('id','field'+idx);
+			}
+			
+			function changeArea(e){
+				$('#noneArea').attr('id','area'+idx);
+			}
+			
+			function changeCareer(e){
+				$('#noneCareer').attr('id','career'+idx);
+			}
+			
+			function registerNotice(){
+				var range = $('#noticeRange').val().split(' to ');
+				var startdate = range[0];
+				var enddate = range[1];
+				var type = '';
+				var collect = '';
+				
+				for(var i=0;i<=idx;i++){
+					if(i != 0) type += ',';
+					type += $('#company'+i).val() + '/' + $('#field'+i).val()  + '/' + $('#area'+i).val()  + '/' + $('#career'+i).val() ; 
+				}
+				
+				for(var i=0;i<5;i++){
+					if($('#collect' + i).is(':checked')){
+						if(i != 0) collect += ',';
+						collect += $('#collect' + i).val();
+					}
+				}
+
+				$('#sStartdate').attr("value",startdate);
+				$('#sEnddate').attr("value",enddate);
+				$('#sType').attr("value",type);
+				$('#sCollect').attr("value",collect);
+			
+				$('#registerNotice').submit();
+			}
+			
+	    </script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                            <h2 class="content-header-title float-start mb-0">채용공고 등록</h2>
+                            <div class="breadcrumb-wrapper">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="index.html">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item"><a href="#">채용</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">채용공고 등록
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+				
+            </div>
+            <div class="content-body">
+            	<!-- 
+                <section>
+                    <div class="row">
+						<!-- 기수부여 
+						<div class="col-md-12 col-12">
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">기수부여</h4>
+								</div>
+								<div class="card-body">
+									<div class="row">
+										<div class="col-md-2 col-12">
+											<div class="mb-2">
+												<select class="form-select" id="selectDefault">
+													<option selected>년 선택</option>
+													<option value="2023">2026</option>
+													<option value="2023">2025</option>
+													<option value="2023">2024</option>
+													<option value="2023">2023</option>
+													<option value="2022">2022</option>
+													<option value="2021">2021</option>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-md-2 col-12">
+											<div class="mb-1">
+												<select class="form-select" id="selectDefault">
+													<option selected>월 선택</option>
+													<option value="12">12</option>
+													<option value="11">11</option>
+													<option value="10">10</option>
+													<option value="9">9</option>
+													<option value="8">8</option>
+													<option value="7">7</option>
+													<option value="6">6</option>
+													<option value="5">5</option>
+													<option value="4">4</option>
+													<option value="3">3</option>
+													<option value="2">2</option>
+													<option value="1">1</option>
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- //기수부여 
+                    </div>
+                </section>
+				-->
+				
+                <section id="basic-horizontal-layouts">
+                    <div class="row">
+                    	
+							<!-- 리스트 정보 -->
+	                        <div class="col-md-4 col-12">
+	                            <div class="card">
+	                                <div class="card-header">
+	                                    <h4 class="card-title">리스트 정보</h4>
+	                                </div>
+	                                <div class="card-body">
+	                                	<form th:object="${RecruitDTO}" th:action="@{/admin/recruit/noticeRegister}" enctype="multipart/form-data" method="post" id="registerNotice">
+											<input type="hidden" class="form-control" name="sStartdate" id="sStartdate" value=""/>
+											<input type="hidden" class="form-control" name="sEnddate" id="sEnddate" value=""/>
+											<input type="hidden" class="form-control" name="sType" id="sType" value=""/>
+											<input type="hidden" class="form-control" name="sCollect" id="sCollect" value=""/>
+	                                        <div class="row">
+	                                            <div class="col-12">
+	                                                <div class="mb-1 row">
+	                                                    <div class="col-sm-3">
+	                                                        <label class="col-form-label" for="first-name">회사명</label>
+	                                                    </div>
+	                                                    <div class="col-sm-9">
+															<select class="form-select" id="sCompany" name="sCompany">
+																<option>선택</option>
+																<option value="DCF그룹" th:selected="'DCF그룹' == ${recruit.sCompany}">DCF그룹</option>
+																<option value="정식품" th:selected="'정식품' == ${recruit.sCompany}">정식품</option>
+																<option value="넬보스코" th:selected="'넬보스코' == ${recruit.sCompany}">넬보스코</option>
+																<option value="자연과사람들" th:selected="'자연과사람들' == ${recruit.sCompany}">자연과사람들</option>
+																<option value="오쎄" th:selected="'오쎄' == ${recruit.sCompany}">오쎄</option>
+															</select>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                            <div class="col-12">
+	                                                <div class="mb-1 row">
+	                                                    <div class="col-sm-3">
+	                                                        <label class="col-form-label" for="#">공고명</label>
+	                                                    </div>
+	                                                    <div class="col-sm-9">
+	                                                        <input type="text" id="sTitle" name="sTitle" class="form-control" placeholder="ex)2023년 상반기 신입사원 정기채용" th:value="${recruit.sTitle}"/>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                    
+										<!-- add item 근무지 
+										
+	                                        <div data-repeater-list="group-a">
+	                                            <div class="repeater-wrapper" data-repeater-item>
+	                                                <div class="row">
+														<div class="col-12">
+															<div class="mb-1 row">
+																<div class="col-sm-3">
+																	<label class="col-form-label" for="contact-info">근무지</label>
+																</div>
+																<div class="col-sm-7">
+																	<select class="form-select" id="#">
+																		<option selected>선택</option>
+																		<option value="전국">전국</option>
+																		<option value="서울">서울</option>
+																		<option value="경기">경기</option>
+																		<option value="충북">충북</option>
+																		<option value="충남">충남</option>
+																	</select>
+																</div>
+																<div class="col-sm-2">
+																	 <div class="d-flex flex-column align-items-center justify-content-between border-start invoice-product-actions py-50 px-25">
+																		<i data-feather="x" class="cursor-pointer font-medium-3" data-repeater-delete></i>
+																	   
+																	</div>
+																</div>
+															</div>
+														</div>
+	                                                </div>
+	                                            </div>
+	                                        </div>
+	                                        <div class="row  mb-2">
+	                                            <div class="col-12 ">
+	                                                <button type="button" class="btn btn-primary btn-sm btn-add-new" data-repeater-create>
+	                                                    <i data-feather="plus" class="me-25"></i>
+	                                                    <span class="align-middle">추가</span>
+	                                                </button>
+	                                            </div>
+	                                        </div>
+	                                    
+										<!-- //add item 근무지 -->
+										
+	                                        <div class="row">
+	                                            <div class="col-12">
+	                                                <div class="mb-1 row">
+	                                                    <div class="col-sm-3">
+	                                                        <label class="col-form-label" for="first-name">신입/경력</label>
+	                                                    </div>
+	                                                    <div class="col-sm-9">
+															<select class="form-select" id="sCategory" name="sCategory" th:value="${recruit.sCategory}">
+																<option>선택</option>
+																<option value="신입" th:selected="'신입' == ${recruit.sCategory}">신입</option>
+																<option value="경력" th:selected="'경력' == ${recruit.sCategory}">경력</option>
+																<option value="신입,경력" th:selected="'신입,경력' == ${recruit.sCategory}">신입/경력</option>
+															</select>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+	                                            <div class="col-12">
+	                                                <div class="mb-1 row">
+	                                                    <div class="col-sm-3">
+	                                                        <label class="col-form-label" for="first-name">직원유형</label>
+	                                                    </div>
+	                                                    <div class="col-sm-9">
+															<select class="form-select" id="sCategory2" name="sCategory2" th:value="${recruit.sCategory2}">
+																<option>선택</option>
+																<option value="정규직" th:selected="'정규직' == ${recruit.sCategory2}">정규직</option>
+																<option value="계약직" th:selected="'계약직' == ${recruit.sCategory2}">계약직</option>
+																<option value="정규직/계약직" th:selected="'정규직/계약직' == ${recruit.sCategory2}">정규직/계약직</option>
+															</select>
+	                                                    </div>
+	                                                </div>
+	                                            </div>
+												
+												<div class="col-12">
+													<div class="mb-1 row">
+														<div class="col-sm-3">
+															<label class="col-form-label" for="first-name">공고기간</label>
+														</div>
+														<div class="col-sm-9">
+															<input type="text" id="noticeRange" class="form-control flatpickr-range" placeholder="YYYY-MM-DD to YYYY-MM-DD" th:value="${recruit.sStartdate + ' to ' + recruit.sEnddate}"/>
+														</div>
+														<div class="col-sm-3">
+															<label class="col-form-label" for="first-name">서류발표</label>
+														</div>
+														<div class="col-sm-9">
+															<input type="text" id="s1" name="s1" class="form-control flatpickr-basic flatpickr-input" placeholder="YYYY-MM-DD" th:value="${recruit.s1}"/>
+														</div>
+														<div class="col-sm-3">
+															<label class="col-form-label" for="first-name">1차합격</label>
+														</div>
+														<div class="col-sm-9">
+															<input type="text" id="s2" name="s2" class="form-control flatpickr-basic flatpickr-input" placeholder="YYYY-MM-DD" th:value="${recruit.s2}"/>
+														</div>
+														<div class="col-sm-3">
+															<label class="col-form-label" for="first-name">2차합격</label>
+														</div>
+														<div class="col-sm-9">
+															<input type="text" id="s3" name="s3" class="form-control flatpickr-basic flatpickr-input" placeholder="YYYY-MM-DD" th:value="${recruit.s3}"/>
+														</div>
+													</div>
+												</div>
+	                                        </div>
+	                                    </form>
+	                                </div>
+	                            </div>
+	                        </div>
+						<!-- //리스트 정보 -->
+						<!-- 지원분야, 수집 정보 -->
+						 <div class="col-md-8 col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">지원분야</h4>
+                                </div>
+                                <div class="card-body">
+									
+									<!-- add item 지원요건 -->
+									<form class="source-item">
+                                        <div data-repeater-list="group-a">
+                                            <div class="repeater-wrapper" data-repeater-item>
+                                                <div class="row">
+													<div class="col-3">
+														<div class="mb-1 row">
+															<div class="col-sm-4">
+																<label class="col-form-label" for="first-name">회사명</label>
+															</div>
+															<div class="col-sm-8">
+																<select class="form-select" id="noneCompany" onclick="changeCompany(this)">
+																	<option value="" selected>선택</option>
+																	<option value="DCF그룹">DCF그룹</option>
+																	<option value="정식품">정식품</option>
+																	<option value="넬보스코">넬보스코</option>
+																	<option value="자연과사람들">자연과사람들</option>
+																	<option value="오쎄">오쎄</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-3">
+														<div class="mb-1 row">
+															<div class="col-sm-4">
+																<label class="col-form-label" for="first-name">지원부문</label>
+															</div>
+															<div class="col-sm-8">
+																<select class="form-select" id="noneField" onclick="changeField(this)">
+																	<option value="" selected>선택</option>
+																	<option value="전국">전국</option>
+																	<option value="영업관리">영업관리</option>
+																	<option value="품질관리">품질관리</option>
+																	<option value="전기">전기</option>
+																	<option value="안전관리">안전관리</option>
+																	<option value="품질관리(개발)">품질관리(개발)</option>
+																	<option value="정보전산실">정보전산실</option>
+																	<option value="영업관리">영업관리</option>
+																	<option value="기획디자인">기획디자인</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-2">
+														<div class="mb-1 row">
+															<div class="col-sm-4">
+																<label class="col-form-label" for="first-name">지역</label>
+															</div>
+															<div class="col-sm-8">
+																<select class="form-select" id="noneArea" onclick="changeArea(this)">
+																	<option value="" selected>선택</option>
+																	<option value="전국">전국</option>
+																	<option value="서울">서울</option>
+																	<option value="인천">인천</option>
+																	<option value="경기">경기</option>
+																	<option value="충북">충북</option>
+																	<option value="충남">충남</option>
+																	<option value="인천">인천</option>
+																	<option value="경기">경기</option>
+																	<option value="충북">충북</option>
+																	<option value="충남">충남</option>
+																	<option value="인천">인천</option>
+																	<option value="경기">경기</option>
+																	<option value="충북">충북</option>
+																	<option value="충남">충남</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-3">
+														<div class="mb-1 row">
+															<div class="col-sm-4">
+																<label class="col-form-label" for="first-name">신입/경력</label>
+															</div>
+															<div class="col-sm-8">
+																<select class="form-select" id="noneCareer" onclick="changeCareer(this)">
+																	<option value="" selected>선택</option>
+																	<option value="신입">신입</option>
+																	<option value="경력">경력</option>
+																</select>
+															</div>
+														</div>
+													</div>
+													<div class="col-1">
+														<div class="d-flex flex-column align-items-center justify-content-between border-start invoice-product-actions py-50 px-25">
+															<i data-feather="x" class="cursor-pointer font-medium-3" data-repeater-delete></i>
+														   
+														</div>
+													</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row  mb-2">
+                                            <div class="col-12 ">
+                                                <button type="button" class="btn btn-primary btn-sm btn-add-new" data-repeater-create>
+                                                    <i data-feather="plus" class="me-25"></i>
+                                                    <span class="align-middle">추가</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+									<!-- //add item 지원요건 -->
+
+									<!-- 
+									<form class="form form-horizontal">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="mb-1 row">
+                                                    <div class="col-sm-3">
+                                                        <label class="col-form-label" for="first-name">기타</label>
+                                                    </div>
+                                                    <div class="col-sm-9">
+														<input type="#" id="#" class="form-control" name="#" placeholder="ex)추가할 사항을 넣어주세요." />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+ 									-->
+
+                                </div>
+                            </div>
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">지원서 수집 항목</h4>
+								</div>
+								<div class="card-body">
+									<!-- -->
+									<div class="row">
+										<div class="col-sm-2 ">
+											<div class="mb-1">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="collect0" value="개인정보" checked/>
+													<label class="form-check-label" for="collect0">개인정보</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-2 ">
+											<div class="mb-1">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="collect1" value="학력정보" checked />
+													<label class="form-check-label" for="collect1">학력정보</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-2 ">
+											<div class="mb-1">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="collect2" value="어학/자격/기타" checked />
+													<label class="form-check-label" for="collect2">어학/자격/기타</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-2 ">
+											<div class="mb-1">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="collect3" value="경력사항" checked />
+													<label class="form-check-label" for="collect3">경력사항</label>
+												</div>
+											</div>
+										</div>
+										<div class="col-sm-2 ">
+											<div class="mb-1">
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="collect4" value="자기소개" checked/>
+													<label class="form-check-label" for="collect4">자기소개</label>
+												</div>
+											</div>
+										</div>
+
+										
+									</div>
+									<!-- // -->
+								</div>
+							</div>
+                        </div>
+						<!-- //지원분야 수집 정보 -->
+						
+						<!-- 저장 -->
+						<div class="col-md-12 col-12">
+							<div class="row">
+								 <div class="col-sm-12 center">
+									<button class="btn btn-success btn-submit waves-effect waves-float waves-light me-1" onclick="registerNotice()">저장</button>
+								</div>
+							</div>
+						</div>
+						<!-- //저장 -->
+					</div>
+					
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>

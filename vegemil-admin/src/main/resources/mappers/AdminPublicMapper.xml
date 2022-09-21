@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminPublicMapper">
+
+	<sql id="TvCfColumns">
+		  t_subject
+		, t_date
+		, t_onair
+		, t_youtube
+		, t_youtube_img
+		, t_disp_order
+	</sql>
+	
+	<select id="selectTvCfList" parameterType="com.vegemil.domain.PublicDTO" resultType="com.vegemil.domain.PublicDTO">
+		SELECT
+			t_idx
+			, <include refid="TvCfColumns" />
+		FROM
+			M_AviCf
+		ORDER BY
+			t_idx DESC
+		<include refid="CommonMapper.paging" />
+	</select>
+	
+	<select id="selectTvCfTotalCount" parameterType="com.vegemil.domain.PublicDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_AviCf
+		<include refid="CommonMapper.search" /> 
+	</select>
+	
+	<update id="updateOnair" parameterType="com.vegemil.domain.PublicDTO">
+		UPDATE
+			M_AviCf
+		SET
+			t_onair = #{tOnair}
+		WHERE
+			t_idx = #{tIdx}
+	</update>
+	
+	<insert id="insertTvCf" parameterType="com.vegemil.domain.PublicDTO">
+		INSERT INTO M_AviCf (
+			<include refid="TvCfColumns" />
+		) VALUES (
+			  #{tSubject}
+			, #{tDate}
+			, #{tOnair}
+			, #{tYoutube}
+			, #{tYoutubeImg}
+			, '0'
+		)
+	</insert>
+	
+	<sql id="newsColumns">
+		  m_subject
+		, m_date
+		, m_hit
+		, m_display
+		, m_adname1
+		, m_aduri1
+		, m_adname2
+		, m_aduri2
+		, m_adname3
+		, m_aduri3
+		, m_adname4
+		, m_aduri4
+		, m_adname5
+		, m_aduri5
+		, m_adname6
+		, m_aduri6
+		, m_adname7
+		, m_aduri7
+		, m_adname8
+		, m_aduri8
+		, m_adname9
+		, m_aduri9
+		, m_adname10
+		, m_aduri10
+	</sql>
+	
+	<select id="selectNewsList" parameterType="com.vegemil.domain.PublicDTO" resultType="com.vegemil.domain.PublicDTO">
+		SELECT
+			m_idx
+			, <include refid="newsColumns" />
+		FROM
+			M_MediaNews
+		ORDER BY
+			m_idx DESC
+		<include refid="CommonMapper.paging" />
+	</select>
+	
+	<select id="selectNewsListTotalCount" parameterType="com.vegemil.domain.PublicDTO" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			M_MediaNews
+		<include refid="CommonMapper.search" /> 
+	</select>
+	
+	<update id="updateNewsDisplay" parameterType="com.vegemil.domain.PublicDTO">
+		UPDATE
+			M_MediaNews
+		SET
+			m_display = #{mDisplay}
+		WHERE
+			m_idx = #{mIdx}
+	</update>
+	
+	<insert id="insertNewsList" parameterType="com.vegemil.domain.PublicDTO">
+		INSERT INTO M_MediaNews (
+			<include refid="newsColumns" />
+		) VALUES (
+			  #{mSubject}
+			, #{mDate}
+			, 0
+			, #{mDisplay}
+			, #{mAdname1}
+			, #{mAduri1}
+			, #{mAdname2}
+			, #{mAduri2}
+			, #{mAdname3}
+			, #{mAduri3}
+			, #{mAdname4}
+			, #{mAduri4}
+			, #{mAdname5}
+			, #{mAduri5}
+			, #{mAdname6}
+			, #{mAduri6}
+			, #{mAdname7}
+			, #{mAduri7}
+			, #{mAdname8}
+			, #{mAduri8}
+			, #{mAdname9}
+			, #{mAduri9}
+			, #{mAdname10}
+			, #{mAduri10}
+		)
+	</insert>
+	
+	<select id="selectNewsListDetail" parameterType="long" resultType="com.vegemil.domain.PublicDTO">
+		SELECT
+			*
+		FROM
+			M_MediaNews
+		WHERE
+			m_idx = #{mIdx}
+	</select>
+<!-- 
+	<insert id="insertBabyInfo" parameterType="com.vegemil.domain.BabyDTO">
+		INSERT INTO M_editAdmin_brandBaby (
+			<include refid="BabyColumns" />
+		) VALUES (
+			  #{mbsTitle}
+			, #{mbsContent}
+			, ''
+			, #{mbsImage}
+			, NOW()
+			, #{mbsActive}
+			, #{mbsCheck}
+			, #{mbsCategory}
+		)
+	</insert>
+
+	<select id="selectBabyInfoDetail" parameterType="long" resultType="com.vegemil.domain.BabyDTO">
+		SELECT
+			<include refid="BabyColumns" />
+		FROM
+			M_editAdmin_brandBaby
+		WHERE
+			delete_yn = 'N'
+		AND 
+			mbs_idx = #{mbsIdx}
+	</select>
+
+	<update id="updateBabyInfo" parameterType="com.vegemil.domain.BabyDTO">
+		UPDATE M_editAdmin_brandBaby
+		SET
+			  mbs_title = #{mbsTitle}
+			, mbs_content = #{mbsContent}
+			, mbs_image = #{mbsImage}
+			, mbs_active = #{mbsActive}
+			, mbs_check = #{mbsCheck}
+			, mbs_category = #{mbsCategory}
+			, mbs_getdate = NOW()
+		WHERE
+			mbs_idx = #{mbsIdx}
+	</update>
+
+	<update id="deleteBabyInfo" parameterType="long">
+		UPDATE M_editAdmin_brandBaby
+		SET
+			  delete_yn = 'Y'
+			, delete_time = NOW()
+		WHERE
+			mbs_idx = #{mbsIdx}
+	</update>
+
+	 -->
+</mapper>

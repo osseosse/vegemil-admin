@@ -1,0 +1,54 @@
+
+
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+	html, body {margin:0; padding:0; font-family:"Noto Sans KR", sans-serif, Helvetica }
+
+
+.center {margin:0 auto}
+.text-left{text-align:left}
+.text-right{text-align:right}
+table.listTable {width:100%}
+table.listTable th {font-weight:300; font-size:14px; letter-spacing:-1px }
+table.listTable td {font-size:13px }
+table.listTable th:first-child {padding-top:10px}
+table.listTable td:first-child {padding:10px 5px}
+table.listTable th,
+table.listTable td {padding:10px 2px}
+
+table.listTable .form-check {padding:0}
+table.listTable .form-check .form-check-input {margin:0}
+a.gray {color:#b4b7bd}
+a.gray:hover {color:#b4b7bd; text-decoration:underline}
+a .gray {color:#b4b7bd}
+a .gray:hover {color:#b4b7bd; text-decoration:underline}
+
+.vertical-top {vertical-align:top}
+.vertical-middle {vertical-align:middle}
+.vertical-bottom {vertical-align:bottom}
+.text-dcf {color:#28c76f}
+.text-nnp {color:#1fe2ff}
+.text-osse {color:#ff6305}
+.text-nel {color:#9d5c1d}
+.ml-10 {margin-lefT:10px}
+.ml-20 {margin-lefT:20px; }
+.ml-40 {margin-lefT:30px}
+.ml-40 {margin-lefT:40px}
+
+
+.mt-10 {margin-top:10px}
+.mt-20 {margin-top:20px}
+.mt-30 {margin-top:30px}
+.mt-40 {margin-top:40px}
+.mt-50 {margin-top:50px}
+
+
+.logo_50 img {width:50px}
+.logo_60 img {width:60px}
+ul.ul100 {position:relative; text-align:left; margin:0; padding:0}
+ul.ul100 li {list-style:none; display:inline-block; }
+ul.ul100 li:first-child {width:45%}
+ul.ul100 li:nth-child(2) {width:45%}
+ul.ul100-2 {position:relative; text-align:center}
+ul.ul100-2 li {list-style:none; display:inline-block; width:48%; }
+ul.ul100-2 li:first-child {text-align:right; width:52%}
+ul.ul100-2 li:nth-child(2) {text-align:left; width:40%}

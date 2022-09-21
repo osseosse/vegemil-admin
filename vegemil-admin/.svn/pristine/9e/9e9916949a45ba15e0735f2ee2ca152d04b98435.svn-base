@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.vegemil.mapper.AdminCsMapper">
+
+	<!-- cp뉴스리스트 -->
+	<sql id="cpNewsListColumns">
+		  p_subject
+		, p_fname
+		, p_writedate
+		, p_hit
+	</sql>
+
+	<insert id="insertCpNewsList" parameterType="com.vegemil.domain.CsDTO">
+		INSERT INTO M_CpNews (
+			<include refid="cpNewsListColumns" />
+		) VALUES (
+			  #{pSubject}
+			, #{pFname}
+			, #{pWritedate}
+			, 0
+		)
+	</insert>
+
+	<update id="updateCpNewsList" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_CpNews
+		SET
+			  c_updatetime = NOW()
+			, c_rank = #{cRank}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+
+	<update id="deleteCpNewsList" parameterType="long">
+		DELETE FROM M_CpNews
+		WHERE
+			p_idx = #{pIdx}
+	</update>
+
+	<select id="selectCpNewsList" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			p_idx
+		  , <include refid="cpNewsListColumns" />
+		FROM
+			M_CpNews
+		<!-- WHERE
+			( c_writeDate > LAST_DAY(NOW() - interval 1 month) AND c_writeDate <= LAST_DAY(NOW()) )
+		<include refid="CommonMapper.search" /> -->
+		ORDER BY
+			p_idx DESC
+			
+		<!-- <include refid="CommonMapper.paging" />  -->
+	</select>
+	<!-- cp뉴스리스트 -->
+	
+	<!-- cp Ebook 카운터 -->
+	<select id="selectCpEbookCounter" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			c_idx
+		  , c_id
+		  , c_name
+		  , c_lastdate
+		  , c_count
+		FROM
+			M_Member_Cp
+		ORDER BY
+			c_count DESC
+	</select>
+	<!-- cp Ebook 카운터 -->
+	
+	<!-- cp 교육자료 -->
+	<insert id="insertCpPdsList" parameterType="com.vegemil.domain.CsDTO">
+		INSERT INTO M_CpPds (
+			  <include refid="cpNewsListColumns" />
+			, p_cate
+		) VALUES (
+			  #{pSubject}
+			, #{pFname}
+			, #{pWritedate}
+			, 0
+			, #{pCate}
+		)
+	</insert>
+
+	<update id="updateCpPdsList" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_CpPds
+		SET
+			  c_updatetime = NOW()
+			, c_rank = #{cRank}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+
+	<update id="deleteCpPdsList" parameterType="long">
+		DELETE FROM M_CpPds
+		WHERE
+			p_idx = #{pIdx}
+	</update>
+	
+	<select id="selectCpPds" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			p_idx
+		  , p_cate
+		  , <include refid="cpNewsListColumns" />
+		FROM
+			M_CpPds
+		ORDER BY
+			p_idx DESC
+	</select>
+	<!-- cp 교육자료 -->
+	
+	<!-- 불공정거래 신고 -->
+	<sql id="unfairClaimColumns">
+		    c_idx
+		  , c_name
+		  , c_hp
+		  , c_email
+		  , c_subject
+		  , c_content
+		  , c_writedate
+		  , c_writetime
+		  , c_check
+		  , c_answer
+	</sql>
+	
+	<select id="selectUnfairClaim" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			<include refid="unfairClaimColumns" />
+		FROM
+			M_Claim
+		ORDER BY
+			c_idx DESC
+	</select>
+	
+	<update id="deleteUnfairClaim" parameterType="long">
+		DELETE FROM M_Claim
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	
+	<select id="selectUnfairClaimDetail" parameterType="long" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			<include refid="unfairClaimColumns" />
+		FROM
+			M_Claim
+		WHERE
+			c_idx = #{cIdx}
+	</select>
+	
+	<update id="updateUnfairClaim" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_Claim
+		SET
+			  c_check = #{cCheck}
+			, c_answer = #{cAnswer}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	
+	<update id="updateCheckUnfairClaim" parameterType="com.vegemil.domain.CsDTO">
+		UPDATE M_Claim
+		SET
+			  c_check = #{cCheck}
+		WHERE
+			c_idx = #{cIdx}
+	</update>
+	
+	<!-- 불공정거래 신고 -->
+	
+	<!-- 가정배달 주문 -->
+	<sql id="orderListColumns">
+		    o_idx
+		  , o_name
+		  , o_hp
+		  , o_addr
+		  , o_product
+		  , o_size
+		  , o_ea
+		  , o_day
+		  , o_action
+		  , o_orderdate
+	</sql>
+	
+	<select id="selectOrderList" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			<include refid="orderListColumns" />
+		FROM
+			M_GOrder
+		ORDER BY
+			o_idx DESC
+	</select>
+	
+	<select id="selectProductList" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			  p_idx
+			, p_title
+			, p_size
+			, p_uri
+			, p_image
+		FROM
+			M_GProduct
+		ORDER BY
+			p_idx DESC
+	</select>
+	<!-- 가정배달 주문 -->
+	
+	<sql id="subscribeListColumns">
+		    s_idx
+		  , s_name
+		  , s_hp
+		  , s_memo
+		  , s_active
+		  , s_writedate
+		  , s_email
+	</sql>
+	
+	<select id="selectSubscribeList" parameterType="com.vegemil.domain.CsDTO" resultType="com.vegemil.domain.CsDTO">
+		SELECT
+			<include refid="subscribeListColumns" />
+		FROM
+			M_Sabo
+		ORDER BY
+			s_idx DESC
+	</select>
+</mapper>

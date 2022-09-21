@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	layout:decorator="admin/layout/layout">
+	
+	<th:block layout:fragment="title">
+		<title>CP E-Book 접속 카운터</title>
+	</th:block>
+	
+	<th:block layout:fragment="add-css">
+		<!-- BEGIN: Page CSS-->
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/vendors.min.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/charts/apexcharts.css}">
+		<link rel="stylesheet" type="text/css" th:href="@{/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css}">
+		
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css}">
+	    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/pickers/form-flat-pickr.css}">
+
+	    <!-- END: Page CSS-->
+	</th:block>
+	
+	<!-- BEGIN: Page Vendor JS-->
+	<th:block layout:fragment="add-script">
+	    <script th:src="@{/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js}"></script>
+	    <script th:src="@{/app-assets/vendors/js/charts/chart.min.js}"></script>
+		<script th:src="@{/js/admin/cs/cpEbookCounter.js}"></script>
+    </th:block>
+    <!-- END: Page Vendor JS-->
+	
+
+	<th:block layout:fragment="content">
+    <!-- BEGIN: Content-->
+    <div class="app-content content ">
+        <div class="content-overlay"></div>
+        <div class="header-navbar-shadow"></div>
+        <div class="content-wrapper container-xxl p-0">
+            <div class="content-body">
+				<!-- Horizontal Bar Chart Start -->
+				<div class="col-xl-6 col-12">
+				    <div class="card">
+				        <div class="card-header d-flex justify-content-between align-items-sm-center align-items-start flex-sm-row flex-column">
+				            <div class="header-left">
+				                <h4 class="card-title">CP E-Book 접속 카운터</h4>
+				            </div>
+				        </div>
+				        <div class="card-body">
+				            <canvas class="horizontal-bar-chart-ex chartjs" data-height="40000"></canvas>
+				        </div>
+				    </div>
+				</div>
+				<!-- Horizontal Bar Chart End -->
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+    
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+    
+    </th:block>
+    
+</html>
